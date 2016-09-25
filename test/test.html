@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>js-Offcanvas Test Suite</title>
+	<!-- Load local jQuery, removing access to $ (use jQuery, not $). -->
+	<script src="../bower_components/jquery/dist/jquery.js"></script>
+	<script src="https://code.jquery.com/qunit/qunit-1.18.0.js"></script>
+	<script src="../vendor/modernizr.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-1.18.0.css">
+	<link rel="stylesheet" href="../dist/_css/prefixed/js-offcanvas.css">
+	<!-- Load local lib and tests. -->
+	<script src="../dist/_js/js-offcanvas.pkgd.js"></script>
+	<script src="tests.js"></script>
+	<script>
+		/* Removing access to jQuery and $. But it'll still be available as _$, if
+		 you REALLY want to mess around with jQuery in the console. REMEMBER WE
+		 ARE TESTING A PLUGIN HERE, THIS HELPS ENSURE BEST PRACTICES. REALLY. */
+		window._$ = jQuery.noConflict(true);
+		window.utils.supportTransition = false;
+		document.documentElement.className += " enhanced";
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture">
+		<div id="default">
+			<a class="js-offcanvas-trigger" data-offcanvas-trigger="offcanvas" href="#offcanvas" id="offcanvas-trigger">default</a>
+			<aside class="js-offcanvas" id="offcanvas" role="complementary">
+				Aside
+				<input>
+				<button class="js-offcanvas-close" data-button-options='{"modifiers":"close"}' id="offcanvas-trigger-close">Close</button>
+			</aside>
+		</div>
+	</div>
+</body>
+</html>

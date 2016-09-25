@@ -45,3 +45,12 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+### compass
+*.sass-cache*
+
+### npm bower grunt
+*.idea*
+*node_modules*
+*bower_components*
+

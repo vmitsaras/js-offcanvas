@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="support-no-js">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>js-Offcanvas Test Suite</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+	<link rel="stylesheet" href="../dist/_css/prefixed/js-offcanvas.css">
+	<script src="../bower_components/jquery/dist/jquery.js"></script>
+	<script src="../vendor/modernizr.js"></script>
+	<script src="../dist/_js/js-offcanvas.pkgd.js"></script>
+	<script>
+		$( function(){
+			$( document ).bind( "beforecreate.offcanvas", function( e ){
+				var dataOffcanvas = $( e.target ).data('offcanvas-component');
+				console.log(dataOffcanvas);
+				dataOffcanvas.onInit =  function() {
+					console.log(this);
+				};
+			} );
+			$( document ).bind( "create.offcanvas", function( e ){
+				var dataOffcanvas = $( e.target ).data('offcanvas-component');
+				console.log(dataOffcanvas);
+				dataOffcanvas.onOpen =  function() {
+					console.log('Callback onOpen');
+				};
+				dataOffcanvas.onClose =  function() {
+					console.log('Callback onClose');
+				};
+
+			} );
+			$( document ).bind( "clicked.offcanvas-trigger clicked.offcanvas", function( e ){
+				var dataBtnText = $( e.target ).text();
+				console.log(e.type + '.' + e.namespace + ': ' + dataBtnText);
+			} );
+			$( document ).bind( "open.offcanvas", function( e ){
+				var dataOffcanvasID = $( e.target ).attr('id');
+				console.log(e.type + ': #' + dataOffcanvasID);
+			} );
+			$( document ).bind( "resizing.offcanvas", function( e ){
+				var dataOffcanvasID = $( e.target ).attr('id');
+				console.log(e.type + ': #' + dataOffcanvasID);
+			} );
+			$( document ).bind( "close.offcanvas", function( e ){
+				var dataOffcanvasID = $( e.target ).attr('id');
+				console.log(e.type + ': #' + dataOffcanvasID);
+			} );
+			$( '#right' ).bind( "create.offcanvas", function( e ){
+				var dataOffcanvas = $(this).data('offcanvas-component');
+				setTimeout(function(){
+					//dataOffcanvas.open();
+				}, 500);
+
+			} );
+			$( document ).trigger( "enhance" );
+		});
+	</script>
+	<style>
+		body {
+			overflow-x: hidden;
+		}
+	.c-button:active, .c-button:focus {
+		outline: none;
+	}
+	.c-button.is-clicked {
+		box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
+	}
+	.c-button--ripple {
+		margin: 0 0.5em;
+		border-color: #212121;
+		overflow: hidden;
+		position: relative;
+		color: #fafafa;
+		background-color: #212121;
+		background-repeat: repeat-x;
+		background-image: linear-gradient(#393939,#212121);
+		transition: color .1s,background-color .2s,box-shadow .28s cubic-bezier(0.4,0,.2,1);
+	}
+	.c-button--blue {
+		background-image: linear-gradient(#0099CC,#006E92);
+	}
+	.c-button--lg{
+		font-size: 1.2em;
+		padding: 0.7em 1.6em;
+	}
+	.o-ripple--light {
+		background: rgba(247, 247, 247, 0.25);
+	}
+	.o-ripple--gradient {
+		background-image: linear-gradient(rgba(0, 191, 255, 0.56),rgba(2, 55, 72, 0.1));
+	}
+	.u-link-image {
+		position: relative;
+		overflow: hidden;
+		display: inline-block;
+		padding: 0;
+	}
+		.c-button--ripple .c-button__text--visible-on-active,
+		.c-button--ripple.is-clicked .c-button__text { display: none}
+
+		.c-button--ripple.is-clicked .c-button__text--visible-on-active { display: inherit}
+
+		.o-ripple--gradient {
+			background-image: linear-gradient(rgba(0, 191, 255, 0.56),rgba(2, 55, 72, 0.1));
+		}
+</style>
+</head>
+<body>
+
+		<main class="c-offcanvas-content-wrap" role="main">
+			<div class="o-wrapper">
+				<a class="js-offcanvas-trigger" data-offcanvas-trigger="left" href="#left">Left</a>
+				<a class="js-offcanvas-trigger" data-offcanvas-trigger="right" href="#right">Right</a>
+				<a class="js-offcanvas-trigger" data-offcanvas-trigger="top" href="#top">Top</a>
+				<a class="js-offcanvas-trigger" data-offcanvas-trigger="bottom" href="#bottom">Bottom</a>
+			</div>
+		</main>
+
+		<aside class="js-offcanvas" id="left" role="complementary"></aside>
+
+		<aside class="js-offcanvas" data-offcanvas-options='{"modifiers":"right,reveal","modal":false,"resize":false}' id="right" role="complementary">
+			<input>
+			<button class="js-offcanvas-close" data-button-options='{"modifiers":"m1,m2"}'>Close</button>
+		</aside>
+
+		<aside class="js-offcanvas" data-offcanvas-options='{"modifiers":"top,fixed,overlay"}' id="top" role="complementary">
+			<input>
+			<button class="js-offcanvas-close" data-button-options='{"modifiers":"m1,m2"}'>Close</button>
+		</aside>
+		<aside class="js-offcanvas" data-offcanvas-options='{"modifiers":"bottom,fixed,overlay"}' id="bottom" role="complementary">
+			<input>
+			<button class="js-offcanvas-close" data-button-options='{"modifiers":"m1,m2"}'>Close</button>
+		</aside>
+</body>
+</html>

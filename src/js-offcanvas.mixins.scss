@@ -1,0 +1,91 @@
+//  ==========================================================================
+//  Offcanvas Mixins
+//  ==========================================================================
+
+//GPU acceleration
+%u-ha {
+  transform: translate3d(0,0,0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+%u-offcanvas-animate {
+  transition: transform 300ms $sharp-curve;
+}
+
+%is-open {
+  transform: translate3d(0,0,0);
+  visibility: visible;
+}
+
+@mixin offcanvas($position:left, $offset:$offcanvas-width, $overlay:false, $reveal:false) {
+  @if $position == 'left' {
+    width: $offcanvas-left-width;
+    transform: translate3d(-$offset,0,0);
+
+    @if ($supportCSSTransforms == false) {
+
+      &.c-offcanvas--support-no-transitions {
+        left: -$offset--left;
+        &.is-open {
+          left: 0;
+
+        }
+
+      }
+
+    }
+  }
+  @if ($position == 'right') {
+    width: $offcanvas-right-width;
+    right: 0;
+    transform: translate3d($offset,0,0);
+  } @else if ($position == 'top') {
+    left: 0;
+    right: 0;
+    top: 0;
+    height:$offset;
+    min-height: auto;
+    width:100%;
+    transform: translate3d(0,-$offset,0);
+  } @else if ( $position == 'bottom' ) {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height:$offset;
+    min-height: auto;
+    width:100%;
+    transform: translate3d(0,$offset,0);
+  }
+}
+
+
+@mixin offcanvas-content($position:left,$offset:$offcanvas-width, $reveal:true) {
+  @if ($reveal == true) {
+    @if ($position == 'right') {
+      &.is-open {
+        transform: translate3d(-$offset,0,0);
+      }
+    }
+    @if ($position == 'left') {
+      &.is-open {
+        transform: translate3d($offset,0,0);
+      }
+    }
+
+  }
+}
+
+@mixin offcanvas-bg($position:left, $offset:$offcanvas-width) {
+
+  @if ($position == 'right') {
+    &.is-open {
+      transform: translate3d(-$offset,0,0);
+    }
+  }
+  @if ($position == 'left') {
+    &.is-open {
+      transform: translate3d($offset,0,0);
+    }
+  }
+}

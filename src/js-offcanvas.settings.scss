@@ -1,0 +1,38 @@
+//  ==========================================================================
+//  Offcanvas Settings
+//  ==========================================================================
+
+
+$offcanvas-width: 17em !default;
+$offcanvas-left-width: $offcanvas-width;
+$offcanvas-right-width: $offcanvas-width;
+$offset--left: 17em !default;
+$offset--right: 17em !default;
+$offset--top: 12.5em !default;
+$offset--bottom: 12.5em !default;
+$offcanvas-content-reveal-left-offset: $offset--left!default;
+$offcanvas-content-reveal-right-offset: $offset--right!default;
+
+//content
+$offset-content-wrap--left: 17em !default;
+$offset-content-wrap--right: $offset-content-wrap--left !default;
+
+// position
+$offcanvas-enable-left:    true !default;
+$offcanvas-enable-right:   true !default;
+$offcanvas-enable-top:   true !default;
+$offcanvas-enable-bottom:   true !default;
+// style
+$offcanvas-enable-overlay:   true !default;
+$offcanvas-enable-push:   true !default;
+$offcanvas-enable-reveal:   true !default;
+
+$supportCSSTransforms:   true !default;
+
+$elements:  body-text,offcanvas-reveal,offcanvas-content-wrap,header,offcanvas-overlay,offcanvas,offcanvas-trigger,offcanvas-panel,offcanvas-btn;
+
+// https://material.google.com/motion/duration-easing.html#duration-easing-common-durations
+$deceleration-curve: cubic-bezier(0.0, 0.0, 0.2, 1); //Easing out
+$acceleration-curve: cubic-bezier(0.4, 0.0, 1, 1); // Easing in
+$sharp-curve: cubic-bezier(0.4, 0.0, 0.6, 1);
+$standard-curve: cubic-bezier(0.4, 0.0, 0.2, 1);

@@ -1,0 +1,60 @@
+{
+  "name": "js-offcanvas",
+  "title": "js-Offcanvas",
+  "main": "src/js-offcanvas.js",
+  "description": "jQuery Accesible Offcanvas Panels",
+  "version": "1.0.0",
+  "homepage": "https://github.com/vmitsaras/js-offcanvas",
+  "license": "MIT",
+  "keywords": [
+    "agruntccesible",
+    "offcanvas"
+  ],
+  "author": {
+    "name": "Vasileios Mitsaras",
+    "twitter": "vmitsaras",
+    "github": "vmitsaras",
+    "email": "github@vasilis.co",
+    "url": "http://vasilis.co"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.3",
+    "bower": "^1.7.7",
+    "cssnano": "^3.5.2",
+    "glob": "^7.0.3",
+    "grunt": "^0.4.5",
+    "grunt-banner": "^0.6.0",
+    "grunt-bytesize": "^0.1.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-qunit": "^1.0.1",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-gh-pages": "^1.0.0",
+    "grunt-lintspaces": "^0.7.4",
+    "grunt-mkdir": "^1.0.0",
+    "grunt-modernizr": "^1.0.2",
+    "grunt-postcss": "^0.8.0",
+    "load-grunt-tasks": "^3.4.1",
+    "matchdep": "^1.0.1",
+    "qunitjs": "^1.22.0"
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.2.10"
+  },
+  "config": {
+    "grunt": "grunt",
+    "src": "src",
+    "dist": "dist",
+    "test": "test",
+    "demo": "demo"
+  }
+}

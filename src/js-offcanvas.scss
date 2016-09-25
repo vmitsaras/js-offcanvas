@@ -1,0 +1,233 @@
+//  ==========================================================================
+//  Offcanvas Variables
+//  ==========================================================================
+
+@import "js-offcanvas.settings";
+@import "js-offcanvas.mixins";
+
+/**
+ * Offcanvas-content-wrap
+*/
+.c-offcanvas-content-wrap {
+  position: relative;
+  z-index: index($elements, offcanvas-content-wrap);
+  overflow: hidden;
+  background: #fff;
+}
+
+/**
+ * Offcanvas Panel
+*/
+.c-offcanvas {
+  @extend %u-ha;
+  @extend %u-offcanvas-animate;
+  position: fixed;
+  min-height: 100%;
+  max-height: none;
+  top: 0;
+  display: block;
+  background: #fff;
+  overflow: hidden;
+
+  &.is-open {
+    @extend %is-open;
+  }
+  &--opening {
+    transition-timing-function: $sharp-curve;
+  }
+  &.is-closed {
+    //width: 0; IE10 BUG
+    max-height: 100%;
+    overflow: hidden;
+    visibility: hidden;
+    box-shadow: none;
+  }
+
+}
+
+.c-offcanvas.is-scrollable {
+  overflow-y: auto;
+}
+
+.c-offcanvas--overlay {
+  z-index: index($elements, offcanvas);
+}
+
+.c-offcanvas--reveal {
+  z-index: index($elements, offcanvas-reveal);
+}
+
+/**
+ * Offcanvas BG-Overlay
+*/
+.c-offcanvas-bg {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: index($elements, offcanvas-overlay);
+  left: -100%;
+  background-color: transparent;
+  transition: background-color 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+
+  &.is-animating,
+  &.is-open {
+    left: 0;
+    background-color: hsla(0, 0%, 0%, 0.68);
+    visibility: visible;
+  }
+
+  &.is-closed {visibility: hidden}
+}
+
+/**
+ * Position Left
+ *
+*/
+
+@if ($offcanvas-enable-left == true) {
+  .c-offcanvas--left {
+    height: 100%;
+    @include offcanvas(left,$offset--left,$offcanvas-enable-overlay,$offcanvas-enable-push);
+  }
+
+  @if ($supportCSSTransforms == false) {
+
+    .c-offcanvas.c-offcanvas--support-no-transitions {
+      left: -$offset--left;
+
+      .c-offcanvas--left{
+        &.c-offcanvas--overlay,
+        &.c-offcanvas--push,
+        &.is-open {
+          left: 0;
+        }
+      }
+
+    }
+
+  }
+}
+
+/**
+ *  Position Right
+ *
+*/
+@if ($offcanvas-enable-right == true) {
+
+  .c-offcanvas--right {
+    height: 100%;
+    @include offcanvas(right,$offset--right,$offcanvas-enable-overlay,$offcanvas-enable-push);
+  }
+}
+
+/**
+ * Position Top
+ *
+*/
+@if ($offcanvas-enable-top == true) {
+
+  .c-offcanvas--top {
+    @include offcanvas(top,$offset--top,$offcanvas-enable-overlay,$offcanvas-enable-push);
+  }
+}
+/**
+ * Position Bottom
+ *
+*/
+@if ($offcanvas-enable-bottom == true) {
+
+  .c-offcanvas--bottom {
+    @include offcanvas(bottom,$offset--bottom,$offcanvas-enable-overlay,$offcanvas-enable-push);
+  }
+}
+/**
+ * Reveal
+ *
+*/
+@if ($offcanvas-enable-reveal== true) {
+  .c-offcanvas-content-wrap{
+    @extend %u-ha;
+    @extend %u-offcanvas-animate;
+    z-index: index($elements, offcanvas-content-wrap);
+  }
+  .c-offcanvas-content-wrap--reveal {
+    //Left
+    @if ($offcanvas-enable-left == true) {
+      &.c-offcanvas-content-wrap--left {
+        @include offcanvas-content(left,$offcanvas-content-reveal-left-offset);
+      }
+    }
+    // Right
+    @if ($offcanvas-enable-right == true) {
+      &.c-offcanvas-content-wrap--right {
+        @include offcanvas-content(right,$offcanvas-content-reveal-right-offset);
+      }
+    }
+  }
+  .c-offcanvas--reveal{
+    z-index: 0;
+    transform: translate3d(0,0,0);
+  }
+
+  .c-offcanvas-bg.c-offcanvas-bg--reveal{
+    @extend %u-offcanvas-animate;
+    @if ($offcanvas-enable-left == true) {
+      &.c-offcanvas-bg--left {
+        @include offcanvas-bg(left,$offset--left);
+      }
+    }
+    @if ($offcanvas-enable-right == true) {
+      &.c-offcanvas-bg--right {
+        @include offcanvas-bg(right,$offset--right);
+      }
+    }
+  }
+}
+
+/**
+ * Push
+ *
+*/
+@if ($offcanvas-enable-push== true) {
+
+  .c-offcanvas--push {
+    z-index: index($elements, offcanvas);
+    &--opening {
+      transition-timing-function: $deceleration-curve;
+    }
+  }
+  .c-offcanvas-content-wrap{
+    @extend %u-ha;
+    @extend %u-offcanvas-animate;
+    z-index: index($elements, offcanvas-content-wrap);
+  }
+  .c-offcanvas-content-wrap--push {
+    //Left
+    @if ($offcanvas-enable-left == true) {
+      &.c-offcanvas-content-wrap--left {
+        @include offcanvas-content(left,$offcanvas-content-reveal-left-offset);
+      }
+    }
+    // Right
+    @if ($offcanvas-enable-right == true) {
+      &.c-offcanvas-content-wrap--right {
+        @include offcanvas-content(right,$offcanvas-content-reveal-right-offset);
+      }
+    }
+  }
+
+  .c-offcanvas-bg.c-offcanvas-bg--push{
+    @extend %u-offcanvas-animate;
+    @if ($offcanvas-enable-left == true) {
+      &.c-offcanvas-bg--left {
+        @include offcanvas-bg(left,$offset--left);
+      }
+    }
+    @if ($offcanvas-enable-right == true) {
+      &.c-offcanvas-bg--right {
+        @include offcanvas-bg(right,$offset--right);
+      }
+    }
+  }
+}

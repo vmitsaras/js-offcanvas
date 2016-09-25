@@ -1,0 +1,165 @@
+/* line 6, ../../src/js-offcanvas.mixins.scss */
+.c-offcanvas, .c-offcanvas-content-wrap {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* line 11, ../../src/js-offcanvas.mixins.scss */
+.c-offcanvas, .c-offcanvas-content-wrap {
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* line 15, ../../src/js-offcanvas.mixins.scss */
+.c-offcanvas.is-open {
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+}
+
+/**
+ * Offcanvas-content-wrap
+*/
+/* line 11, ../../src/js-offcanvas.scss */
+.c-offcanvas-content-wrap {
+  position: relative;
+  z-index: 3;
+  overflow: hidden;
+  background: #fff;
+}
+
+/**
+ * Offcanvas Panel
+*/
+/* line 21, ../../src/js-offcanvas.scss */
+.c-offcanvas {
+  position: fixed;
+  min-height: 100%;
+  max-height: none;
+  top: 0;
+  display: block;
+  background: #fff;
+  overflow: hidden;
+}
+/* line 35, ../../src/js-offcanvas.scss */
+.c-offcanvas--opening {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+/* line 38, ../../src/js-offcanvas.scss */
+.c-offcanvas.is-closed {
+  max-height: 100%;
+  overflow: hidden;
+  visibility: hidden;
+  box-shadow: none;
+}
+
+/* line 48, ../../src/js-offcanvas.scss */
+.c-offcanvas.is-scrollable {
+  overflow-y: auto;
+}
+
+/* line 52, ../../src/js-offcanvas.scss */
+.c-offcanvas--overlay {
+  z-index: 6;
+}
+
+/* line 56, ../../src/js-offcanvas.scss */
+.c-offcanvas--reveal {
+  z-index: 2;
+}
+
+/**
+ * Offcanvas BG-Overlay
+*/
+/* line 63, ../../src/js-offcanvas.scss */
+.c-offcanvas-bg {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 5;
+  left: -100%;
+  background-color: transparent;
+  transition: background-color 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+/* line 73, ../../src/js-offcanvas.scss */
+.c-offcanvas-bg.is-animating, .c-offcanvas-bg.is-open {
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.68);
+  visibility: visible;
+}
+/* line 80, ../../src/js-offcanvas.scss */
+.c-offcanvas-bg.is-closed {
+  visibility: hidden;
+}
+
+/**
+ * Offcanvas Panel Position Left
+ *
+*/
+/* line 89, ../../src/js-offcanvas.scss */
+.c-offcanvas--left {
+  height: 100%;
+  width: 17em;
+  transform: translate3d(-17em, 0, 0);
+}
+
+/**
+ * Offcanvas Panel Position Right
+ *
+*/
+/* line 119, ../../src/js-offcanvas.scss */
+.c-offcanvas--right {
+  height: 100%;
+  width: 17em;
+  right: 0;
+  transform: translate3d(17em, 0, 0);
+}
+
+/**
+ * Offcanvas Panel Position Top
+ *
+*/
+/* line 131, ../../src/js-offcanvas.scss */
+.c-offcanvas--top {
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 12.5em;
+  min-height: auto;
+  width: 100%;
+  transform: translate3d(0, -12.5em, 0);
+}
+
+/**
+ * Offcanvas Panel Position Bottom
+ *
+*/
+/* line 141, ../../src/js-offcanvas.scss */
+.c-offcanvas--bottom {
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 12.5em;
+  min-height: auto;
+  width: 100%;
+  transform: translate3d(0, 12.5em, 0);
+}
+
+/**
+ * Offcanvas Content Display Reveal
+ *
+*/
+/* line 71, ../../src/js-offcanvas.mixins.scss */
+.c-offcanvas-content-wrap--reveal.c-offcanvas-content-wrap--left.is-open {
+  transform: translate3d(17em, 0, 0);
+}
+/* line 66, ../../src/js-offcanvas.mixins.scss */
+.c-offcanvas-content-wrap--reveal.c-offcanvas-content-wrap--right.is-open {
+  transform: translate3d(-17em, 0, 0);
+}
+
+/* line 164, ../../src/js-offcanvas.scss */
+.c-offcanvas--reveal {
+  z-index: 0;
+  transform: translate3d(0, 0, 0);
+}
