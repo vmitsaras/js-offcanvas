@@ -2,7 +2,7 @@
 
 jQuery accessible Offcanvas plugin, using ARIA
 
-[View Demo](http://offcanvas.vasilis.co) 
+[View Demo](http://offcanvas.vasilis.co) | [Edit on Codepen](http://codepen.io/vmitsaras/pen/gwGwJE)
 
 ## Why it is accessible
 
