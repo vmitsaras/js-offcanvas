@@ -1,5 +1,7 @@
 # js-offcanvas 
 
+[![Downloads](https://img.shields.io/npm/dt/js-offcanvas.svg)](https://www.npmjs.com/package/js-offcanvas) [![Version](https://img.shields.io/npm/v/js-offcanvas.svg)](https://www.npmjs.com/package/js-offcanvas) [![AMA](https://img.shields.io/badge/ask%20me-anything-1abc9c.svg)](http://twitter.com/?status=@vmitsaras) 
+
 jQuery accessible Offcanvas plugin, using ARIA
 
 [View Demo](http://offcanvas.vasilis.co) | [Edit on Codepen](http://codepen.io/vmitsaras/pen/gwGwJE)
