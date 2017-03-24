@@ -757,9 +757,9 @@
 	var pluginName = "offcanvas",
 		initSelector = ".js-" + pluginName;
 
-	$.fn[ pluginName ] = function(){
+	$.fn[ pluginName ] = function(options){
 		return this.each( function(){
-			new w.componentNamespace.Offcanvas( this ).init();
+			new w.componentNamespace.Offcanvas( this, options ).init();
 		});
 	};
 

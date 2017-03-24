@@ -280,6 +280,7 @@ Feel free to [let me know](http://www.twitter.com/vmitsaras) if you use js-offca
 
 ## Release History
 
+* `v1.1.0`: Missing Options.
 * `v1.0.0`: Initial release.
 
 ## License
