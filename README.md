@@ -12,7 +12,7 @@ jQuery accessible Offcanvas plugin, using ARIA
 - The tab key loops through all of the keyboard focusable items within the offcanvas
 - You can close it using <kbd>Esc</kbd>.
 
-##Features
+## Features
 
 - Uses CSS transforms & transitions.
 - BEM <kbd>c-offcanvas c-offcanvas--left is-open</kbd>
@@ -22,7 +22,7 @@ jQuery accessible Offcanvas plugin, using ARIA
 - Package managers Bower & NPM
 
 ***
-######Table of Contents
+###### Table of Contents
 
 
 1. [Getting Started](#getting-started)  
@@ -45,14 +45,14 @@ jQuery accessible Offcanvas plugin, using ARIA
 ---
 
 ## Getting Started
-#####CDN
+##### CDN
 Include the Offcanvas `.css` and `.js` files in your site. Link directly to Offcanvas files on [npmcdn](https://npmcdn.com/).
 ```html
 <script src="https://npmcdn.com/js-offcanvas@1.0/dist/_js/js-offcanvas.pkgd.min.js"></script>
 <link rel="stylesheet" href="https://npmcdn.com/js-offcanvas@1.0/dist/_css/minified/js-offcanvas.css">
 ```
 
-#####HTML
+##### HTML
 Offcanvas works on a container element with no styles applied. 
 ```html
 <body>
@@ -65,7 +65,7 @@ Offcanvas works on a container element with no styles applied.
 </body>
 
 ```
-#####JS
+##### JS
 ```js
 $( function(){
     $(document).trigger("enhance");
@@ -94,14 +94,14 @@ offcanvas.init();
 <a class="js-offcanvas-trigger" data-offcanvas-trigger="off-canvas" href="#off-canvas">Menu</a>
 <aside class="js-offcanvas" data-offcanvas-options='{ "modifiers": "left,overlay" }' id="off-canvas"></aside>
 ```
-#####Enhance
+##### Enhance
 Typically the enhancement is triggered on DOM ready.
 ```js
 $( function(){
     $(document).trigger("enhance");
 });
 ```
-#Options
+# Options
 Set instance options by passing a valid object at initialization, or to the public defaults method. Custom options for a specific instance can also be set by attaching a data-offcanvas-options attribute to the target elment.
 This attribute should contain the properly formatted JSON object representing the custom options.
 ```html
@@ -123,51 +123,51 @@ This attribute should contain the properly formatted JSON object representing th
 | **onOpen**      | null      |function|
 | **onClose**      | null      |function|
 
-##API
+## API
 The offcanvas API offers a couple of methods to control the offcanvas and are publicly available to all active instances.
 
 ```js
 var dataOffcanvas = $('#off-canvas').data('offcanvas-component');
 ```
-##Methods
+## Methods
 ####`open`
 ```js
 dataOffcanvas.open();
 ```
-####`close`
+#### `close`
 ```js
 dataOffcanvas.close();
 ```
-####`toggle`
+#### `toggle`
 ```js
 dataOffcanvas.toggle();
 ```
-###Callbacks
-####`onInit`
+### Callbacks
+#### `onInit`
 Fires an event when offcanvas is initialized.
 ```js
 dataOffcanvas.onInit = function() {
     console.log(this);
 };
 ```
-####`onOpen`
+#### `onOpen`
 Fires an event when offcanvas is opened.
 ```js
 dataOffcanvas.onOpen = function() {
     console.log('Callback onOpen');
 };
 ```
-####`onClose `
+#### `onClose `
 Fires an event when offcanvas is closed.
 ```js
 dataOffcanvas.onClose  = function() {
     console.log(this);
 };
 ```
-##Events
+## Events
 jQuery.offcanvas fires several events. Simply listen for them with the jQuery.on function. All events are namespaced with offcanvas.
 
-####`beforecreate `
+#### `beforecreate `
 Fires an event before the offcanvas is initialized.
 ```js
 $( document ).on( "beforecreate.offcanvas", function( e ){
@@ -178,27 +178,27 @@ $( document ).on( "beforecreate.offcanvas", function( e ){
 	};
 } );
 ```
-####`create `
+#### `create `
 Fired once the Plugin is initialized.
 ```js
 $( document ).on( "create.offcanvas", function( e ){ } );
 ```
-####`open `
+#### `open `
 Fired when the `open` method is called.
 ```js
 $( document ).on( "open.offcanvas", function( e ){ } );
 ```
-####`close `
+#### `close `
 Fired when the `close` method is called.
 ```js
 $( document ).on( "close.offcanvas", function( e ){ } );
 ```
-####`resizing `
+#### `resizing `
 Fired when the window is resized.
 ```js
 $( document ).on( "resizing.offcanvas", function( e ){ } );
 ```
-####`clicked `
+#### `clicked `
 Fired when the trigger-btn is clicked.
 ```js
 $( document ).on( "clicked.offcanvas-trigger", function( e ){
@@ -207,8 +207,8 @@ $( document ).on( "clicked.offcanvas-trigger", function( e ){
 } );
 ```
 
-##Examples
-####Left
+## Examples
+#### Left
 *With HTML*
 ```html
 <button data-offcanvas-trigger="off-canvas-left">Left</button>
@@ -220,7 +220,7 @@ $('#off-canvas-left').offcanvas({
     modifiers: 'left' // default
 });
 ```
-####Right
+#### Right
 *With HTML*
 ```html
 <button data-offcanvas-trigger="off-canvas-right">Right</button>
@@ -233,7 +233,7 @@ $('#off-canvas-right').offcanvas({
 });
 ```
 
-####Top
+#### Top
 *With HTML*
 ```html
 
@@ -247,7 +247,7 @@ $('#off-canvas-top').offcanvas({
 });
 ```
 
-####Bottom
+#### Bottom
 *With HTML*
 ```html
 <button data-offcanvas-trigger="off-canvas-bottom">Bottom</button>
@@ -260,12 +260,12 @@ $('#off-canvas-bottom').offcanvas({
 });
 ```
 
-##Package managers
+## Package managers
 
 * Install with Bower: `bower install js-offcanvas --save`
 * Install with npm: `npm install js-offcanvas`
 
-##Dependencies
+## Dependencies
 * jQuery
 * Modernizr
 * [js-utils](https://github.com/vmitsaras/js-utils)
