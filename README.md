@@ -72,13 +72,13 @@ $( function(){
 });
 ```
 
-#### Initialize with Vanilla JavaScript
+#### Initialize with jQuery
 ```js
 $('#off-canvas').offcanvas({
 // options
 });
 ```
-#### Initialize with jQuery
+#### Initialize with Vanilla JavaScript
 ```js
 var elem = document.getElementById('#off-canvas');
 var offcanvas = new w.componentNamespace.Offcanvas( elem, {
