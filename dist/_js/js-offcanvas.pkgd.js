@@ -349,10 +349,11 @@
 		if ( options.modifiers ) {
 			utils.cssModifiers(options.modifiers,buttonClasses,options.baseClass);
 		}
+		if ( options.wrapText ) {
+			this.$buttonText.addClass( buttonTextClasses.join( " " ) );
+		}
 
-		this.$buttonText.addClass( buttonTextClasses.join( " " ) );
-
-		if ( options.textActive ) {
+		if ( options.textActive && options.wrapText ) {
 			options.toggle = true;
 			buttonTextClasses.push( utils.createModifierClass(options.baseClass+'__text',cl.showHide) );
 			buttonClasses.push( utils.createModifierClass(options.baseClass,cl.toggleState) );

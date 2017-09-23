@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class="support-no-js">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>js-Offcanvas Test Suite</title>
+	<link rel="stylesheet" href="../dist/_css/prefixed/js-offcanvas.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+	<script src="../vendor/modernizr.js"></script>
+	<script src="../dist/_js/js-offcanvas.pkgd.js"></script>
+	<script>
+		// https://github.com/filamentgroup/AppendAround
+		/*! appendAround markup pattern. [c]2012, @scottjehl, Filament Group, Inc. MIT/GPL
+		 how-to:
+		 1. Insert potential element containers throughout the DOM
+		 2. give each container a data-set attribute with a value that matches all other containers' values
+		 3. Place your appendAround content in one of the potential containers
+		 4. Call appendAround() on that element when the DOM is ready
+		 */
+		(function( $ ){
+			$.fn.appendAround = function(){
+				return this.each(function(){
+
+					var $self = $( this ),
+							att = "data-set",
+							$parent = $self.parent(),
+							parent = $parent[ 0 ],
+							attval = $parent.attr( att ),
+							$set = $( "["+ att +"='" + attval + "']" );
+
+					function isHidden( elem ){
+						return $(elem).css( "display" ) === "none";
+					}
+
+					function appendToVisibleContainer(){
+						if( isHidden( parent ) ){
+							var found = 0;
+							$set.each(function(){
+								if( !isHidden( this ) && !found ){
+									$self.appendTo( this );
+									found++;
+									parent = this;
+								}
+							});
+						}
+					}
+
+					appendToVisibleContainer();
+
+					$(window).bind( "resize", appendToVisibleContainer );
+
+				});
+			};
+		}( jQuery ));
+	</script>
+	<script>
+		$( function(){
+			$( document ).trigger( "enhance" );
+
+			$( '#left' ).offcanvas( {
+				modifiers: "right,overlay",
+				triggerButton: '.js-offcanvas-toggler',
+				onInit :  function() {
+					$(this).removeClass('is-hidden');
+				}
+			} );
+			$( ".js-append-around" ).appendAround();
+			$( ".sample" ).appendAround();
+		});
+	</script>
+	<style>
+		body {
+			overflow-x: hidden;
+		}
+		.starter-template {
+			 padding: 3rem 1.5rem;
+			 text-align: center;
+		 }
+		.offcanvas-nav .form-inline { display: none}
+		.is-hidden {  visibility: hidden;}
+</style>
+</head>
+<body>
+		<div class="c-offcanvas-content-wrap">
+			<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+				<a class="navbar-brand" href="#">Navbar</a>
+				<button class="navbar-toggler js-offcanvas-toggler" data-button-options='{"wrapText":false}' aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault" data-set="bs">
+					<ul class="navbar-nav mr-auto js-append-around">
+						<li class="nav-item active">
+							<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Link</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link disabled" href="#">Disabled</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown01">
+								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="#">Another action</a>
+								<a class="dropdown-item" href="#">Something else here</a>
+							</div>
+						</li>
+					</ul>
+					<form class="form-inline my-2 my-lg-0 js-append-around">
+						<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form>
+				</div>
+			</nav>
+			<main role="main">
+
+				<div class="container">
+
+					<div class="starter-template">
+						<h1>Bootstrap starter template</h1>
+						<p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+					</div>
+
+				</div><!-- /.container -->
+
+			</main>
+		</div>
+
+		<div class="c-offcanvas is-hidden" id="left" role="complementary">
+
+			<div class="navbar">
+				<button type="button" class="btn btn-block btn-outline-dark js-offcanvas-close">Close</button>
+				<div class="input-group mt-3">
+					<input type="text" class="form-control" placeholder="Search for..." aria-label="Search for...">
+					<span class="input-group-btn">
+					<button class="btn btn-secondary" type="button">Go!</button>
+				  </span>
+				</div>
+				<!-- container for appendAround -->
+				<div class="offcanvas-nav d-block d-md-none" data-set="bs"></div>
+			</div>
+		</div>
+</body>
+</html>
