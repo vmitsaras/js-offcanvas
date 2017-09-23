@@ -22,34 +22,15 @@ jQuery accessible Offcanvas plugin, using ARIA
 - Package managers Bower & NPM
 
 ***
-###### Table of Contents
-
-
-1. [Getting Started](#getting-started)  
-    * [CDN](#cdn) 
-    * [HTML](#html)
-    * [JS](#js)
-    * [Initialize with Vanilla JavaScript](#initialize-with-vanilla-javaScript)
-    * [Initialize with jQuery](#initialize-with-vanilla-jquery)
-    * [Initialize with HTML](#initialize-with-vanilla-html)
-    * [Enhance](#enhance)
-2. [Options](#options)
-     * [API](#api)
-     * [Methods](#methods)
-     * [Callbacks](#callbacks)
-     * [Events](#events)
-3. [Examples](#examples)
-4. [Package Managers](#package-managers)
-5. [Dependencies](#dependencies)
-  
+ 
 ---
 
 ## Getting Started
-##### CDN
-Include the Offcanvas `.css` and `.js` files in your site. Link directly to Offcanvas files on [npmcdn](https://npmcdn.com/).
+##### JS & CSS
+Include the Offcanvas `.css` and `.js` files in your site.
 ```html
-<script src="https://npmcdn.com/js-offcanvas@1.0/dist/_js/js-offcanvas.pkgd.min.js"></script>
-<link rel="stylesheet" href="https://npmcdn.com/js-offcanvas@1.0/dist/_css/minified/js-offcanvas.css">
+<script src="js-offcanvas.pkgd.min.js"></script>
+<link href="js-offcanvas.css" rel="stylesheet">
 ```
 
 ##### HTML
@@ -61,46 +42,29 @@ Offcanvas works on a container element with no styles applied.
         <a href="#off-canvas" data-offcanvas-trigger="off-canvas">Menu</a>
         ...
     </div>
-    <aside id="off-canvas"></aside>
+    <aside class="js-offcanvas" id="off-canvas"></aside>
 </body>
 
 ```
-##### JS
+##### Initialize
 ```js
+
+$('#off-canvas').offcanvas({
+// options
+});
+// or trigger enhance - Initialize with HTML 
 $( function(){
     $(document).trigger("enhance");
 });
 ```
 
-#### Initialize with jQuery
-```js
-$('#off-canvas').offcanvas({
-// options
-});
-```
-#### Initialize with Vanilla JavaScript
-```js
-var elem = document.getElementById('#off-canvas');
-var offcanvas = new w.componentNamespace.Offcanvas( elem, {
-    // options
-    modifiers: 'left,overlay'
-});
-
-offcanvas.init();
-```
 #### Initialize with HTML     
 
 ```html
 <a class="js-offcanvas-trigger" data-offcanvas-trigger="off-canvas" href="#off-canvas">Menu</a>
 <aside class="js-offcanvas" data-offcanvas-options='{ "modifiers": "left,overlay" }' id="off-canvas"></aside>
 ```
-##### Enhance
-Typically the enhancement is triggered on DOM ready.
-```js
-$( function(){
-    $(document).trigger("enhance");
-});
-```
+
 # Options
 Set instance options by passing a valid object at initialization, or to the public defaults method. Custom options for a specific instance can also be set by attaching a data-offcanvas-options attribute to the target elment.
 This attribute should contain the properly formatted JSON object representing the custom options.
@@ -118,7 +82,7 @@ This attribute should contain the properly formatted JSON object representing th
 | **bodyModifierClass**      | "has-offcanvas"      |string|
 | **supportNoTransitionsClass**      | "support-no-transitions"      |string|
 | **resize**      | true      |boolean|
-| **target**      | null      |string|
+| **triggerButton**      | null      |string|
 | **onInit**      | null      |function|
 | **onOpen**      | null      |function|
 | **onClose**      | null      |function|
@@ -208,57 +172,24 @@ $( document ).on( "clicked.offcanvas-trigger", function( e ){
 ```
 
 ## Examples
-#### Left
+#### Basic
 *With HTML*
 ```html
 <button data-offcanvas-trigger="off-canvas-left">Left</button>
-<aside id="off-canvas-left"></aside>
+<aside class="js-offcanvas" id="off-canvas-left"></aside>
 ```
 *With jQuery*
 ```js
 $('#off-canvas-left').offcanvas({
-    modifiers: 'left' // default
+    modifiers: 'left, overlay', // options
+    triggerButton: '.js-left' // btn to open offcanvas
 });
 ```
-#### Right
-*With HTML*
 ```html
-<button data-offcanvas-trigger="off-canvas-right">Right</button>
-<aside id="off-canvas-right" data-offcanvas-options='{ "modifiers": "right" }'></aside>
-```
-*With jQuery*
-```js
-$('#off-canvas-right').offcanvas({
-    modifiers: 'right'
-});
+<button class="js-left">Left</button>
+<aside id="off-canvas-left"></aside>
 ```
 
-#### Top
-*With HTML*
-```html
-
-<button data-offcanvas-trigger="off-canvas-top">Top</button>
-<aside id="off-canvas-top" data-offcanvas-options='{ "modifiers": "top" }'></aside>
-```
-*With jQuery*
-```js
-$('#off-canvas-top').offcanvas({
-    modifiers: 'top'
-});
-```
-
-#### Bottom
-*With HTML*
-```html
-<button data-offcanvas-trigger="off-canvas-bottom">Bottom</button>
-<aside id="off-canvas-bottom" data-offcanvas-options='{ "modifiers": "bottom" }'></aside>
-```
-*With jQuery*
-```js
-$('#off-canvas-bottom').offcanvas({
-    modifiers: 'bottom'
-});
-```
 
 ## Package managers
 
@@ -268,9 +199,6 @@ $('#off-canvas-bottom').offcanvas({
 ## Dependencies
 * jQuery
 * Modernizr
-* [js-utils](https://github.com/vmitsaras/js-utils)
-* [js-trap-tab](https://github.com/vmitsaras/js-trap-tab)
-* [js-button](https://github.com/vmitsaras/js-button)
 
 ---
 

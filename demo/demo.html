@@ -52,6 +52,11 @@
 				}, 500);
 
 			} );
+
+			$( '#left' ).offcanvas( {
+				modifiers: "left,overlay",
+				triggerButton: '.js-test'
+			} );
 			$( document ).trigger( "enhance" );
 		});
 	</script>
@@ -109,14 +114,14 @@
 
 		<main class="c-offcanvas-content-wrap" role="main">
 			<div class="o-wrapper">
-				<a class="js-offcanvas-trigger" data-offcanvas-trigger="left" href="#left">Left</a>
+				<a class="js-test .js-offcanvas-trigger" data-offcanvas-trigger="left" href="#left">Left</a>
 				<a class="js-offcanvas-trigger" data-offcanvas-trigger="right" href="#right">Right</a>
 				<a class="js-offcanvas-trigger" data-offcanvas-trigger="top" href="#top">Top</a>
 				<a class="js-offcanvas-trigger" data-offcanvas-trigger="bottom" href="#bottom">Bottom</a>
 			</div>
 		</main>
 
-		<aside class="js-offcanvas" id="left" role="complementary"></aside>
+		<aside class=".js-offcanvas" id="left" role="complementary"></aside>
 
 		<aside class="js-offcanvas" data-offcanvas-options='{"modifiers":"right,reveal","modal":false,"resize":false}' id="right" role="complementary">
 			<input>

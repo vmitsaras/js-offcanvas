@@ -33,6 +33,7 @@
 		this.$element.data( componentName, this );
 		this.$element.trigger( "beforecreate." + name );
 		this._addAttributes();
+		this._initTrigger();
 		this._createModal();
 		this._trapTabKey();
 		this._closeButton();
@@ -277,10 +278,10 @@
 			att = "data-offcanvas-trigger",
 			$triggerButton;
 
-		if (!options.target) {
+		if (!options.triggerButton) {
 			$triggerButton = $( "["+ att +"='" + offcanvasID + "']" );
 		} else {
-			$triggerButton = $(options.target);
+			$triggerButton = $(options.triggerButton);
 		}
 		new w.componentNamespace.OffcanvasTrigger( $triggerButton[0], { "offcanvas": offcanvasID } ).init();
 	};
@@ -299,7 +300,7 @@
 		bodyModifierClass: "has-offcanvas",
 		supportNoTransitionsClass: "support-no-transitions",
 		resize: true,
-		target: null,
+		triggerButton: null,
 		modal: true,
 		onOpen: null,
 		onClose: null,

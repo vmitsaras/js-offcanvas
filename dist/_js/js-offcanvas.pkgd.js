@@ -326,7 +326,9 @@
 			options.label = this.$element.html();
 		}
 
-		this.$buttonText = $( '<span></span>' ).html( options.label ).appendTo(this.$element.empty());
+		if ( options.wrapText ) {
+			this.$buttonText = $( '<span></span>' ).html( options.label ).appendTo(this.$element.empty());
+		}
 
 		if ( options.icon ) {
 
@@ -407,6 +409,7 @@
 		modifiers: null,
 		controls: null,
 		textActive: null,
+		wrapText: true,
 		hideText: false,
 		hideTitle: false,
 		icon: null,
@@ -474,6 +477,7 @@
 		this.$element.data( componentName, this );
 		this.$element.trigger( "beforecreate." + name );
 		this._addAttributes();
+		this._initTrigger();
 		this._createModal();
 		this._trapTabKey();
 		this._closeButton();
@@ -718,10 +722,10 @@
 			att = "data-offcanvas-trigger",
 			$triggerButton;
 
-		if (!options.target) {
+		if (!options.triggerButton) {
 			$triggerButton = $( "["+ att +"='" + offcanvasID + "']" );
 		} else {
-			$triggerButton = $(options.target);
+			$triggerButton = $(options.triggerButton);
 		}
 		new w.componentNamespace.OffcanvasTrigger( $triggerButton[0], { "offcanvas": offcanvasID } ).init();
 	};
@@ -740,7 +744,7 @@
 		bodyModifierClass: "has-offcanvas",
 		supportNoTransitionsClass: "support-no-transitions",
 		resize: true,
-		target: null,
+		triggerButton: null,
 		modal: true,
 		onOpen: null,
 		onClose: null,
@@ -829,16 +833,15 @@
 
 })(this, jQuery);
 
-
 (function( w, $ ){
 	"use strict";
 
-	var pluginName = "offcanvas-trigger",
-		initSelector = ".js-" + pluginName;
+	var pluginName = "offcanvasTrigger",
+		initSelector = "[data-offcanvas-trigger],.js-" + pluginName;
 
-	$.fn[ pluginName ] = function(){
+	$.fn[ pluginName ] = function(options){
 		return this.each( function(){
-			new w.componentNamespace.OffcanvasTrigger( this ).init();
+			new w.componentNamespace.OffcanvasTrigger( this,options ).init();
 		});
 	};
 

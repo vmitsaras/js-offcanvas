@@ -1,13 +1,12 @@
-
 (function( w, $ ){
 	"use strict";
 
-	var pluginName = "offcanvas-trigger",
-		initSelector = ".js-" + pluginName;
+	var pluginName = "offcanvasTrigger",
+		initSelector = "[data-offcanvas-trigger],.js-" + pluginName;
 
-	$.fn[ pluginName ] = function(){
+	$.fn[ pluginName ] = function(options){
 		return this.each( function(){
-			new w.componentNamespace.OffcanvasTrigger( this ).init();
+			new w.componentNamespace.OffcanvasTrigger( this,options ).init();
 		});
 	};
 
