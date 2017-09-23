@@ -67,22 +67,15 @@
 
 			$( '#right' ).offcanvas( {
 				modifiers: "right,overlay",
-				triggerButton: '.js-offcanvas-toggler',
-				onInit :  function() {
-					$(this).removeClass('is-hidden');
-				}
+				triggerButton: '.js-offcanvas-toggler'
 			} );
 
 			$( '#left' ).offcanvas( {
 				modifiers: "left,push",
-				triggerButton: '.js-sidebar-toggler',
-				onInit :  function() {
-					$(this).removeClass('is-hidden');
-				}
+				triggerButton: '.js-sidebar-toggler'
 			} );
 
 			$( ".js-append-around" ).appendAround();
-			$( ".sample" ).appendAround();
 
 			$( document ).trigger( "enhance" );
 		});
