@@ -94,7 +94,7 @@ The offcanvas API offers a couple of methods to control the offcanvas and are pu
 var dataOffcanvas = $('#off-canvas').data('offcanvas-component');
 ```
 ## Methods
-####`open`
+#### `open`
 ```js
 dataOffcanvas.open();
 ```
