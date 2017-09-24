@@ -189,7 +189,8 @@ $('#off-canvas-left').offcanvas({
 <button class="js-left">Left</button>
 <aside id="off-canvas-left"></aside>
 ```
-
+#### Bootstrap
+check demo dashboard & starter
 
 ## Package managers
 
