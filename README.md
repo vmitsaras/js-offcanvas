@@ -178,6 +178,13 @@ $( document ).on( "clicked.offcanvas-trigger", function( e ){
 <button data-offcanvas-trigger="off-canvas-left">Left</button>
 <aside class="js-offcanvas" id="off-canvas-left"></aside>
 ```
+```js   
+  // you have to trigger enhance
+   $( function(){
+       $(document).trigger("enhance");
+   });
+   ```
+
 *With jQuery*
 ```js
 $('#off-canvas-left').offcanvas({
@@ -189,8 +196,8 @@ $('#off-canvas-left').offcanvas({
 <button class="js-left">Left</button>
 <aside id="off-canvas-left"></aside>
 ```
-#### Bootstrap
-check demo dashboard & starter
+#### Bootstrap v4
+ [dashboard](https://codepen.io/vmitsaras/full/pWNrEy/) & [starter](https://codepen.io/vmitsaras/full/veyJmv/)
 
 ## Package managers
 
