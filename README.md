@@ -37,6 +37,7 @@ Include the `.css` and `.js` files in your site.
 <script src="js-offcanvas.pkgd.min.js"></script>
 <link href="js-offcanvas.css" rel="stylesheet">
 ````
+###### CDN
 ```html
 <script src="https://unpkg.com/js-offcanvas/dist/_js/js-offcanvas.pkgd.min.js"></script> 
 <link href="https://unpkg.com/js-offcanvas/dist/_css/prefixed/js-offcanvas.css" rel="stylesheet">
@@ -82,6 +83,32 @@ Include the CSS-Class `js-offcanvas`  and `data-offcanvas-options="{options}"`
    $( function(){
        $(document).trigger("enhance");
    });
+   ```
+
+## Options
+```js   
+$('#offCanvas').offcanvas({    
+    role: "dialog",
+    modifiers: "left,overlay",
+    baseClass: "c-offcanvas",
+    modalClass: "c-offcanvas-bg",
+    contentClass: "c-offcanvas-content-wrap",
+    closeButtonClass: "js-offcanvas-close",
+    bodyModifierClass: "has-offcanvas",
+    supportNoTransitionsClass: "support-no-transitions",
+    resize: true,
+    triggerButton: '#triggerButton' ,
+    modal: true,
+    onOpen: function() {},
+    onClose: function() {},
+    onInit: function() {}
+})
+.on( "create.offcanvas", function( e ){ } )
+.on( "open.offcanvas", function( e ){ } )
+.on( "opening.offcanvas", function( e ){ } )
+.on( "close.offcanvas", function( e ){ } )
+.on( "closing.offcanvas", function( e ){ } )
+.on( "resizing.offcanvas", function( e ){ } );
    ```
 
 ## Examples on Codepen

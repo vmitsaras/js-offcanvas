@@ -149,7 +149,9 @@
 				this._addClasses(this.$modal,this.isOpen,true);
 			}
 
-			this.$element.attr( "aria-hidden", "false" ).addClass(utils.createModifierClass(options.baseClass,'opening'));
+			this.$element.attr( "aria-hidden", "false" )
+				.addClass(utils.createModifierClass(options.baseClass,'opening'))
+				.trigger( "opening." + name );
 			this.$content.addClass( this._contentOpenClasses.join( " " ));
 
 			// Transition End Callback
@@ -167,7 +169,6 @@
 				this.$trigger.button._isExpanded(true);
 			}
 			// callback on open
-			//options.onOpen( this );
 			if( this.onOpen && typeof this.onOpen === 'function' ) {
 				this.onOpen.call(this.$element);
 			}
@@ -178,8 +179,8 @@
 	};
 
 	Offcanvas.prototype.close = function(){
-		var self = this;
-
+		var self = this,
+			options = self.options;
 		if( !this.isOpen ){
 			return;
 		}
@@ -191,7 +192,10 @@
 		if (this.options.modal) {
 			this._addClasses(this.$modal,this.isOpen,true);
 		}
-		this.$element.attr( "aria-hidden", "true" );
+
+		this.$element.attr( "aria-hidden", "true" )
+			.addClass(utils.createModifierClass(options.baseClass,'closing'))
+			.trigger( "closing." + name );
 
 		this.trapTabKey.unbindTrap();
 
@@ -208,6 +212,7 @@
 			}
 
 			self.$content.removeClass( self._contentOpenClasses.join( " " ) );
+			self.$element.removeClass(utils.createModifierClass(options.baseClass,'closing'));
 
 			$('body').removeClass(self._bodyOpenClasses.join(" "));
 
@@ -216,7 +221,6 @@
 			}
 		} );
 		// callback onClose
-		//options.onClose( this );
 		if( this.onClose && typeof this.onClose === 'function' ) {
 			this.onClose.call(this.element);
 		}
