@@ -271,7 +271,9 @@
 		function onResize() {
 			requestTick();
 			self.$element.trigger( "resizing." + name );
-			self.close();
+			if (self.options.resize) {
+				self.close();
+			}
 		}
 		$(window).on('resize.' + name + ' orientationchange.' + name, onResize);
 	};
