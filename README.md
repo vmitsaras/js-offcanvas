@@ -26,44 +26,101 @@ jQuery accessible Offcanvas plugin, using ARIA
 ---
 
 ## Getting Started
+
+* Install with Bower: `bower install js-offcanvas --save`
+* Install with npm: `npm install js-offcanvas`
+* Install with yarn: `yarn add js-offcanvas`
+
 ##### JS & CSS
-Include the Offcanvas `.css` and `.js` files in your site.
+Include the `.css` and `.js` files in your site.
 ```html
 <script src="js-offcanvas.pkgd.min.js"></script>
 <link href="js-offcanvas.css" rel="stylesheet">
+````
+###### CDN
+```html
+<script src="https://unpkg.com/js-offcanvas/dist/_js/js-offcanvas.pkgd.min.js"></script> 
+<link href="https://unpkg.com/js-offcanvas/dist/_css/prefixed/js-offcanvas.css" rel="stylesheet">
 ```
 
 ##### HTML
 Offcanvas works on a container element with no styles applied. 
 ```html
-<body>
     <div class="c-offcanvas-content-wrap">
-        ...
-        <a href="#off-canvas" data-offcanvas-trigger="off-canvas">Menu</a>
-        ...
+        <a href="#offCanvas" id="triggerButton">Menu</a>
+         <!-- Your Main Content goes here -->
     </div>
-    <aside class="js-offcanvas" id="off-canvas"></aside>
-</body>
-
+    
+    <aside id="offCanvas"></aside>
 ```
 ##### Initialize
 ```js
 
-$('#off-canvas').offcanvas({
-// options
-});
-// or trigger enhance - Initialize with HTML 
-$( function(){
-    $(document).trigger("enhance");
+$('#offCanvas').offcanvas({
+    modifiers: 'left, overlay', // default options
+    triggerButton: '#triggerButton' // btn to open offcanvas
 });
 ```
 
-#### Initialize with HTML     
-
+##### Initialize with HTML
+###### Trigger Button
+Include the CSS-Class `js-offcanvas-trigger`  and `data-offcanvas-trigger="id-of-your-offcanvas"`
 ```html
-<a class="js-offcanvas-trigger" data-offcanvas-trigger="off-canvas" href="#off-canvas">Menu</a>
-<aside class="js-offcanvas" data-offcanvas-options='{ "modifiers": "left,overlay" }' id="off-canvas"></aside>
+<a  class="js-offcanvas-trigger" 
+    data-offcanvas-trigger="off-canvas-id"
+    href="#off-canvas">Menu</a>
+````
+###### Offcanvas Element
+Include the CSS-Class `js-offcanvas`  and `data-offcanvas-options="{options}"`
+```html
+<aside class="js-offcanvas" 
+       data-offcanvas-options='{"modifiers": "left,overlay"}' 
+       id="off-canvas-id">...</aside>
 ```
+###### Trigger Enhance
+```js   
+  // you have to trigger enhance
+   $( function(){
+       $(document).trigger("enhance");
+   });
+   ```
+
+## Options
+```js   
+$('#offCanvas').offcanvas({    
+    role: "dialog",
+    modifiers: "left,overlay",
+    baseClass: "c-offcanvas",
+    modalClass: "c-offcanvas-bg",
+    contentClass: "c-offcanvas-content-wrap",
+    closeButtonClass: "js-offcanvas-close",
+    bodyModifierClass: "has-offcanvas",
+    supportNoTransitionsClass: "support-no-transitions",
+    resize: true,
+    triggerButton: '#triggerButton' ,
+    modal: true,
+    onOpen: function() {},
+    onClose: function() {},
+    onInit: function() {}
+})
+.on( "create.offcanvas", function( e ){ } )
+.on( "open.offcanvas", function( e ){ } )
+.on( "opening.offcanvas", function( e ){ } )
+.on( "close.offcanvas", function( e ){ } )
+.on( "closing.offcanvas", function( e ){ } )
+.on( "resizing.offcanvas", function( e ){ } );
+   ```
+
+## Examples on Codepen
+* [Collection](https://codepen.io/collection/ArLPWW/)
+* [Codepen Template](https://codepen.io/vmitsaras/pen/jrGAOa)
+* [Demo Site Examples](https://codepen.io/vmitsaras/pen/gwGwJE)
+* [Full Width](https://codepen.io/vmitsaras/pen/ZpXAmA)
+* [Codrops  SVG Shape Overlays](https://codepen.io/vmitsaras/pen/MOQqmX)
+#### Bootstrap v4
+* [Dashboard](https://codepen.io/vmitsaras/full/pWNrEy/) 
+* [Starter](https://codepen.io/vmitsaras/full/veyJmv/)
+* [Boxed Layout](https://codepen.io/vmitsaras/pen/wrLePg)
 
 # Options
 Set instance options by passing a valid object at initialization, or to the public defaults method. Custom options for a specific instance can also be set by attaching a data-offcanvas-options attribute to the target elment.
@@ -170,54 +227,15 @@ $( document ).on( "clicked.offcanvas-trigger", function( e ){
     console.log(e.type + '.' + e.namespace + ': ' + dataBtnText);
 } );
 ```
+  
+[http://offcanvas.vasilis.co](http://offcanvas.vasilis.co)
 
-## Examples
-#### Basic
-*With HTML*
-```html
-<button data-offcanvas-trigger="off-canvas-left">Left</button>
-<aside class="js-offcanvas" id="off-canvas-left"></aside>
-```
-```js   
-  // you have to trigger enhance
-   $( function(){
-       $(document).trigger("enhance");
-   });
-   ```
-
-*With jQuery*
-```js
-$('#off-canvas-left').offcanvas({
-    modifiers: 'left, overlay', // options
-    triggerButton: '.js-left' // btn to open offcanvas
-});
-```
-```html
-<button class="js-left">Left</button>
-<aside id="off-canvas-left"></aside>
-```
-#### Bootstrap v4
- [dashboard](https://codepen.io/vmitsaras/full/pWNrEy/) & [starter](https://codepen.io/vmitsaras/full/veyJmv/)
-
-## Package managers
-
-* Install with Bower: `bower install js-offcanvas --save`
-* Install with npm: `npm install js-offcanvas`
 
 ## Dependencies
 * jQuery
 * Modernizr
 
 ---
-
-[View Demo](http://offcanvas.vasilis.co)
-
-Feel free to [let me know](http://www.twitter.com/vmitsaras) if you use js-offcanvas in one of your websites.
-
-## Release History
-
-* `v1.1.0`: Missing Options.
-* `v1.0.0`: Initial release.
 
 ## License
 Licensed under the MIT license.
