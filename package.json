@@ -3,7 +3,7 @@
   "title": "js-Offcanvas",
   "main": "src/js-offcanvas.js",
   "description": "jQuery Accesible Offcanvas Panels",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "homepage": "https://github.com/vmitsaras/js-offcanvas",
   "license": "MIT",
   "keywords": [

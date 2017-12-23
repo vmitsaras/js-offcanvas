@@ -27,7 +27,8 @@
   top: 0;
   display: block;
   background: #fff;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   &.is-open {
     @extend %is-open;
@@ -43,10 +44,6 @@
     box-shadow: none;
   }
 
-}
-
-.c-offcanvas.is-scrollable {
-  overflow-y: auto;
 }
 
 .c-offcanvas--overlay {

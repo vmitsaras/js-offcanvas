@@ -614,7 +614,6 @@
 				this.$trigger.button._isExpanded(true);
 			}
 			// callback on open
-			//options.onOpen( this );
 			if( this.onOpen && typeof this.onOpen === 'function' ) {
 				this.onOpen.call(this.$element);
 			}
@@ -667,7 +666,6 @@
 			}
 		} );
 		// callback onClose
-		//options.onClose( this );
 		if( this.onClose && typeof this.onClose === 'function' ) {
 			this.onClose.call(this.element);
 		}

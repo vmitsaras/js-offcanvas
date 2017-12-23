@@ -37,13 +37,14 @@
   top: 0;
   display: block;
   background: #fff;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
-/* line 35, ../../src/js-offcanvas.scss */
+/* line 36, ../../src/js-offcanvas.scss */
 .c-offcanvas--opening {
   transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
 }
-/* line 38, ../../src/js-offcanvas.scss */
+/* line 39, ../../src/js-offcanvas.scss */
 .c-offcanvas.is-closed {
   max-height: 100%;
   overflow: hidden;
@@ -51,17 +52,12 @@
   box-shadow: none;
 }
 
-/* line 48, ../../src/js-offcanvas.scss */
-.c-offcanvas.is-scrollable {
-  overflow-y: auto;
-}
-
-/* line 52, ../../src/js-offcanvas.scss */
+/* line 49, ../../src/js-offcanvas.scss */
 .c-offcanvas--overlay {
   z-index: 6;
 }
 
-/* line 56, ../../src/js-offcanvas.scss */
+/* line 53, ../../src/js-offcanvas.scss */
 .c-offcanvas--reveal {
   z-index: 2;
 }
@@ -69,7 +65,7 @@
 /**
  * Offcanvas BG-Overlay
 */
-/* line 63, ../../src/js-offcanvas.scss */
+/* line 60, ../../src/js-offcanvas.scss */
 .c-offcanvas-bg {
   position: fixed;
   top: 0;
@@ -80,13 +76,13 @@
   background-color: transparent;
   transition: background-color 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
-/* line 73, ../../src/js-offcanvas.scss */
+/* line 70, ../../src/js-offcanvas.scss */
 .c-offcanvas-bg.is-animating, .c-offcanvas-bg.is-open {
   left: 0;
   background-color: rgba(0, 0, 0, 0.68);
   visibility: visible;
 }
-/* line 80, ../../src/js-offcanvas.scss */
+/* line 77, ../../src/js-offcanvas.scss */
 .c-offcanvas-bg.is-closed {
   visibility: hidden;
 }
@@ -95,7 +91,7 @@
  * Position Left
  *
 */
-/* line 89, ../../src/js-offcanvas.scss */
+/* line 86, ../../src/js-offcanvas.scss */
 .c-offcanvas--left {
   height: 100%;
   width: 17em;
@@ -106,7 +102,7 @@
  *  Position Right
  *
 */
-/* line 118, ../../src/js-offcanvas.scss */
+/* line 115, ../../src/js-offcanvas.scss */
 .c-offcanvas--right {
   height: 100%;
   width: 17em;
@@ -118,7 +114,7 @@
  * Position Top
  *
 */
-/* line 130, ../../src/js-offcanvas.scss */
+/* line 127, ../../src/js-offcanvas.scss */
 .c-offcanvas--top {
   left: 0;
   right: 0;
@@ -133,7 +129,7 @@
  * Position Bottom
  *
 */
-/* line 140, ../../src/js-offcanvas.scss */
+/* line 137, ../../src/js-offcanvas.scss */
 .c-offcanvas--bottom {
   top: auto;
   left: 0;
@@ -149,7 +145,7 @@
  * Reveal
  *
 */
-/* line 149, ../../src/js-offcanvas.scss */
+/* line 146, ../../src/js-offcanvas.scss */
 .c-offcanvas-content-wrap {
   z-index: 3;
 }
@@ -163,7 +159,7 @@
   transform: translate3d(-17em, 0, 0);
 }
 
-/* line 168, ../../src/js-offcanvas.scss */
+/* line 165, ../../src/js-offcanvas.scss */
 .c-offcanvas--reveal {
   z-index: 0;
   transform: translate3d(0, 0, 0);
@@ -182,16 +178,16 @@
  * Push
  *
 */
-/* line 194, ../../src/js-offcanvas.scss */
+/* line 191, ../../src/js-offcanvas.scss */
 .c-offcanvas--push {
   z-index: 6;
 }
-/* line 196, ../../src/js-offcanvas.scss */
+/* line 193, ../../src/js-offcanvas.scss */
 .c-offcanvas--push--opening {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
-/* line 200, ../../src/js-offcanvas.scss */
+/* line 197, ../../src/js-offcanvas.scss */
 .c-offcanvas-content-wrap {
   z-index: 3;
 }
