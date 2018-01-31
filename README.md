@@ -138,7 +138,7 @@ This attribute should contain the properly formatted JSON object representing th
 | **role**      | "dialog"      |string|
 | **bodyModifierClass**      | "has-offcanvas"      |string|
 | **supportNoTransitionsClass**      | "support-no-transitions"      |string|
-| **resize**      | true      |boolean|
+| **resize**      | false      |boolean|
 | **triggerButton**      | null      |string|
 | **onInit**      | null      |function|
 | **onOpen**      | null      |function|
