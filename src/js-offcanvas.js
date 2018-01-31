@@ -141,7 +141,7 @@
 				this.lastFocus = doc.activeElement;
 			}
 			this.isOpen = true;
-			$('body').addClass(this._bodyOpenClasses.join(" "));
+			$('html, body').addClass(this._bodyOpenClasses.join(" "));
 
 			this._addClasses(this.$element,this.isOpen,true);
 			this._addClasses(this.$content,this.isOpen,true);
@@ -214,7 +214,7 @@
 			self.$content.removeClass( self._contentOpenClasses.join( " " ) );
 			self.$element.removeClass(utils.createModifierClass(options.baseClass,'closing'));
 
-			$('body').removeClass(self._bodyOpenClasses.join(" "));
+			$('html, body').removeClass(self._bodyOpenClasses.join(" "));
 
 			if( self.lastFocus ){
 				self.lastFocus.focus();
@@ -305,7 +305,7 @@
 		closeButtonClass: "js-offcanvas-close",
 		bodyModifierClass: "has-offcanvas",
 		supportNoTransitionsClass: "support-no-transitions",
-		resize: true,
+		resize: false,
 		triggerButton: null,
 		modal: true,
 		onOpen: null,
