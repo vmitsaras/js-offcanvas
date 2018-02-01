@@ -1,6 +1,6 @@
 {
   "name": "js-offcanvas",
-  "version": "1.0.0",
+  "version": "1.2.2",
   "main": [
     "dist/_js/js-offcanvas.pkgd.js",
     "dist/_css/prefixed/js-offcanvas.css"
