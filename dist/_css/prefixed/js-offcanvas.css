@@ -1,17 +1,23 @@
 /* line 6, ../../src/js-offcanvas.mixins.scss */
 .c-offcanvas, .c-offcanvas-content-wrap {
-  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
 /* line 11, ../../src/js-offcanvas.mixins.scss */
 .c-offcanvas, .c-offcanvas-content-wrap, .c-offcanvas-bg.c-offcanvas-bg--reveal, .c-offcanvas-bg.c-offcanvas-bg--push {
+  -webkit-transition: -webkit-transform 300ms cubic-bezier(0.4, 0, 0.6, 1);
+  transition: -webkit-transform 300ms cubic-bezier(0.4, 0, 0.6, 1);
   transition: transform 300ms cubic-bezier(0.4, 0, 0.6, 1);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.6, 1), -webkit-transform 300ms cubic-bezier(0.4, 0, 0.6, 1);
 }
 
 /* line 15, ../../src/js-offcanvas.mixins.scss */
 .c-offcanvas.is-open {
-  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
   visibility: visible;
 }
 
@@ -42,7 +48,8 @@
 }
 /* line 36, ../../src/js-offcanvas.scss */
 .c-offcanvas--opening {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+          transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
 }
 /* line 39, ../../src/js-offcanvas.scss */
 .c-offcanvas.is-closed {
@@ -74,6 +81,7 @@
   z-index: 5;
   left: -100%;
   background-color: transparent;
+  -webkit-transition: background-color 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   transition: background-color 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
 /* line 70, ../../src/js-offcanvas.scss */
@@ -95,7 +103,8 @@
 .c-offcanvas--left {
   height: 100%;
   width: 17em;
-  transform: translate3d(-17em, 0, 0);
+  -webkit-transform: translate3d(-17em, 0, 0);
+          transform: translate3d(-17em, 0, 0);
 }
 
 /**
@@ -107,7 +116,8 @@
   height: 100%;
   width: 17em;
   right: 0;
-  transform: translate3d(17em, 0, 0);
+  -webkit-transform: translate3d(17em, 0, 0);
+          transform: translate3d(17em, 0, 0);
 }
 
 /**
@@ -122,7 +132,8 @@
   height: 12.5em;
   min-height: auto;
   width: 100%;
-  transform: translate3d(0, -12.5em, 0);
+  -webkit-transform: translate3d(0, -12.5em, 0);
+          transform: translate3d(0, -12.5em, 0);
 }
 
 /**
@@ -138,7 +149,8 @@
   height: 12.5em;
   min-height: auto;
   width: 100%;
-  transform: translate3d(0, 12.5em, 0);
+  -webkit-transform: translate3d(0, 12.5em, 0);
+          transform: translate3d(0, 12.5em, 0);
 }
 
 /**
@@ -152,26 +164,31 @@
 
 /* line 71, ../../src/js-offcanvas.mixins.scss */
 .c-offcanvas-content-wrap--reveal.c-offcanvas-content-wrap--left.is-open {
-  transform: translate3d(17em, 0, 0);
+  -webkit-transform: translate3d(17em, 0, 0);
+          transform: translate3d(17em, 0, 0);
 }
 /* line 66, ../../src/js-offcanvas.mixins.scss */
 .c-offcanvas-content-wrap--reveal.c-offcanvas-content-wrap--right.is-open {
-  transform: translate3d(-17em, 0, 0);
+  -webkit-transform: translate3d(-17em, 0, 0);
+          transform: translate3d(-17em, 0, 0);
 }
 
 /* line 165, ../../src/js-offcanvas.scss */
 .c-offcanvas--reveal {
   z-index: 0;
-  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 
 /* line 87, ../../src/js-offcanvas.mixins.scss */
 .c-offcanvas-bg.c-offcanvas-bg--reveal.c-offcanvas-bg--left.is-open {
-  transform: translate3d(17em, 0, 0);
+  -webkit-transform: translate3d(17em, 0, 0);
+          transform: translate3d(17em, 0, 0);
 }
 /* line 82, ../../src/js-offcanvas.mixins.scss */
 .c-offcanvas-bg.c-offcanvas-bg--reveal.c-offcanvas-bg--right.is-open {
-  transform: translate3d(-17em, 0, 0);
+  -webkit-transform: translate3d(-17em, 0, 0);
+          transform: translate3d(-17em, 0, 0);
 }
 
 /**
@@ -184,7 +201,8 @@
 }
 /* line 193, ../../src/js-offcanvas.scss */
 .c-offcanvas--push--opening {
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  -webkit-transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+          transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
 /* line 197, ../../src/js-offcanvas.scss */
@@ -194,18 +212,22 @@
 
 /* line 71, ../../src/js-offcanvas.mixins.scss */
 .c-offcanvas-content-wrap--push.c-offcanvas-content-wrap--left.is-open {
-  transform: translate3d(17em, 0, 0);
+  -webkit-transform: translate3d(17em, 0, 0);
+          transform: translate3d(17em, 0, 0);
 }
 /* line 66, ../../src/js-offcanvas.mixins.scss */
 .c-offcanvas-content-wrap--push.c-offcanvas-content-wrap--right.is-open {
-  transform: translate3d(-17em, 0, 0);
+  -webkit-transform: translate3d(-17em, 0, 0);
+          transform: translate3d(-17em, 0, 0);
 }
 
 /* line 87, ../../src/js-offcanvas.mixins.scss */
 .c-offcanvas-bg.c-offcanvas-bg--push.c-offcanvas-bg--left.is-open {
-  transform: translate3d(17em, 0, 0);
+  -webkit-transform: translate3d(17em, 0, 0);
+          transform: translate3d(17em, 0, 0);
 }
 /* line 82, ../../src/js-offcanvas.mixins.scss */
 .c-offcanvas-bg.c-offcanvas-bg--push.c-offcanvas-bg--right.is-open {
-  transform: translate3d(-17em, 0, 0);
+  -webkit-transform: translate3d(-17em, 0, 0);
+          transform: translate3d(-17em, 0, 0);
 }

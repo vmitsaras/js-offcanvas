@@ -96,7 +96,7 @@ $('#offCanvas').offcanvas({
     closeButtonClass: "js-offcanvas-close",
     bodyModifierClass: "has-offcanvas",
     supportNoTransitionsClass: "support-no-transitions",
-    resize: true,
+    resize: false,
     triggerButton: '#triggerButton' ,
     modal: true,
     onOpen: function() {},
