@@ -450,7 +450,7 @@
 	var name = "offcanvas",
 		componentName = name + "-component",
 		utils = w.utils,
-		doc = w.document;
+		doc = document;
 
 	w.componentNamespace = w.componentNamespace || {};
 
