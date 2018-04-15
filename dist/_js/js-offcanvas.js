@@ -295,6 +295,13 @@
 		this.$element.data( componentName + "-trigger", trigger );
 	};
 
+	Offcanvas.prototype.destroy = function(){
+		// TODO remove overlay
+		// TODO remove css-classes & attr
+		// TODO remove event listeners
+		// TODO implement destroy-method in js-button
+	};
+
 	Offcanvas.prototype.defaults = {
 		role: "dialog",
 		modifiers: "left,overlay",
