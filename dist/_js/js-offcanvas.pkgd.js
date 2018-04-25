@@ -1,8 +1,7 @@
-/* global Modernizr:true */
-;(function( w ){
+;(function( window ){
 	"use strict";
 
-	var utils = {};
+	var utils = window.utils || {};
 
 	utils.classes = {
 		hiddenVisually: "u-hidden-visually",
@@ -35,10 +34,6 @@
 		UP: 38
 	};
 
-	/**
-	 * a11yclick
-	 * Slightly modified from: http://www.karlgroves.com/2014/11/24/ridiculously-easy-trick-for-keyboard-accessibility/
-	 */
 	utils.a11yclick = function(event) {
 		var code = event.charCode || event.keyCode,
 			type = event.type;
@@ -53,9 +48,10 @@
 			return false;
 		}
 	};
-	utils.a11yclickBind = function(el, callback,name) {
+
+	utils.a11yclickBind = function(el, callback, name) {
 		el.on("click." + name + " keydown." + name,function(event){
-			if ( w.utils.a11yclick(event)) {
+			if ( utils.a11yclick(event)) {
 				event.preventDefault(event);
 				if( callback && typeof callback === 'function' ) { callback.call(); }
 				el.trigger('clicked.'+name);
@@ -63,24 +59,24 @@
 		});
 	};
 
-	utils.doc = w.document;
-	utils.supportTransition = Modernizr.csstransitions;
-	utils.supportAnimations = Modernizr.cssanimations;
-	utils.transEndEventNames = {
-		'WebkitTransition'	: 'webkitTransitionEnd',
-		'MozTransition'		: 'transitionend',
-		'OTransition'		: 'oTransitionEnd',
-		'msTransition'		: 'MSTransitionEnd',
-		'transition'		: 'transitionend'
+	utils.supportTransition = ('transition' in document.documentElement.style) || ('WebkitTransition' in document.documentElement.style);
+
+	utils.whichTransitionEvent = function () {
+		var el = document.createElement('fakeelement'),
+			transitions = {
+				'transition': 'transitionend',
+				'OTransition': 'oTransitionEnd',
+				'WebkitTransition': 'webkitTransitionEnd'
+			};
+
+		for (var t in transitions) {
+			if (el.style[t] !== undefined) {
+				return transitions[t];
+			}
+		}
 	};
-	utils.animEndEventNames = {
-		'WebkitAnimation' : 'webkitAnimationEnd',
-		'OAnimation' : 'oAnimationEnd',
-		'msAnimation' : 'MSAnimationEnd',
-		'animation' : 'animationend'
-	};
-	utils.transEndEventName = utils.transEndEventNames[Modernizr.prefixed('transition')];
-	utils.animEndEventName = utils.animEndEventNames[Modernizr.prefixed('animation')];
+
+	utils.transEndEventName = utils.whichTransitionEvent();
 
 	utils.onEndTransition = function( el, callback ) {
 		var onEndCallbackFn = function( ev ) {
@@ -92,22 +88,6 @@
 		};
 		if( utils.supportTransition ) {
 			el.addEventListener( utils.transEndEventName, onEndCallbackFn );
-		}
-		else {
-			onEndCallbackFn();
-		}
-	};
-
-	utils.onEndAnimation = function( el, callback ) {
-		var onEndCallbackFn = function( ev ) {
-			if( utils.supportAnimations ) {
-				if( ev.target != this ) return;
-				this.removeEventListener( utils.animEndEventName, onEndCallbackFn );
-			}
-			if( callback && typeof callback === 'function' ) { callback.call(); }
-		};
-		if( utils.supportAnimations ) {
-			el.addEventListener( utils.animEndEventName, onEndCallbackFn );
 		}
 		else {
 			onEndCallbackFn();
@@ -126,9 +106,9 @@
 	};
 
 	utils.getMetaOptions = function( el, name, metadata ){
-		var dataAttr = 'data-' + name;
-		var dataOptionsAttr = dataAttr + '-options';
-		var attr = el.getAttribute( dataAttr ) || el.getAttribute( dataOptionsAttr );
+		var dataAttr = 'data-' + name,
+			dataOptionsAttr = dataAttr + '-options',
+			attr = el.getAttribute( dataAttr ) || el.getAttribute( dataOptionsAttr );
 		try {
 			return attr && JSON.parse( attr ) || {};
 		} catch ( error ) {
@@ -139,21 +119,8 @@
 			return;
 		}
 	};
-	// polyfill raf if needed
-	var raf = (function(callback){
-		return  window.requestAnimationFrame       ||
-			window.webkitRequestAnimationFrame ||
-			window.mozRequestAnimationFrame    ||
-			function( callback ){
-				window.setTimeout(callback, 1000 / 60);
-			};
-	})();
-	utils.raf = function(callback){
-		raf(callback);
-	};
 
-	// expose global utils
-	w.utils = utils;
+	window.utils = utils;
 
 })(this);
 
@@ -444,17 +411,17 @@
 	});
 })(this, jQuery);
 
-;(function( w, $ ){
+;(function( window, $ ){
 	"use strict";
 
 	var name = "offcanvas",
 		componentName = name + "-component",
-		utils = w.utils,
-		doc = w.document;
+		utils = window.utils,
+		doc = window.document;
 
-	w.componentNamespace = w.componentNamespace || {};
+	window.componentNamespace = window.componentNamespace || {};
 
-	var Offcanvas = w.componentNamespace.Offcanvas = function( element,options ){
+	var Offcanvas = window.componentNamespace.Offcanvas = function( element,options ){
 		if( !element ){
 			throw new Error( "Element required to initialize object" );
 		}
@@ -499,7 +466,7 @@
 		if ( options.role) {
 			panelAttr.role = options.role;
 		}
-		if(!w.utils.supportTransition){
+		if(!utils.supportTransition){
 			panelClasses.push( utils.createModifierClass(options.baseClass, options.supportNoTransitionsClass));
 		}
 		utils.cssModifiers(options.modifiers,panelClasses,options.baseClass );
@@ -539,7 +506,7 @@
 	};
 
 	Offcanvas.prototype._trapTabKey = function() {
-		this.trapTabKey = new w.componentNamespace.TrapTabKey(this.element);
+		this.trapTabKey = new window.componentNamespace.TrapTabKey(this.element);
 		this.trapTabKey.init();
 	};
 
@@ -565,7 +532,7 @@
 		}
 		this.$closeBtn = this.$element.find('.'+options.closeButtonClass);
 		if( this.$closeBtn.length ){
-			this.closeBtn = new w.componentNamespace.Button(this.$closeBtn[0]);
+			this.closeBtn = new window.componentNamespace.Button(this.$closeBtn[0]);
 			this.closeBtn.init();
 			this.closeBtn.controls(this.$element.attr('id'));
 			utils.a11yclickBind(this.$closeBtn,closeOffcanvas,name);
@@ -734,7 +701,7 @@
 		} else {
 			$triggerButton = $(options.triggerButton);
 		}
-		new w.componentNamespace.OffcanvasTrigger( $triggerButton[0], { "offcanvas": offcanvasID } ).init();
+		new window.componentNamespace.OffcanvasTrigger( $triggerButton[0], { "offcanvas": offcanvasID } ).init();
 	};
 
 	Offcanvas.prototype.setButton = function(trigger){

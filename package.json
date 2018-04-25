@@ -48,9 +48,16 @@
     "matchdep": "^1.0.1",
     "qunitjs": "^1.22.0"
   },
+  "dependencies": {
+    "js-utilities": "*",
+    "js-trap-tab": "*",
+    "js-ripple": "*",
+    "js-button": "*"
+  },
   "engines": {
     "node": ">=0.8.0",
-    "npm": ">=1.2.10"
+    "npm": ">=1.2.10",
+    "yarn": ">= 1.0.0"
   },
   "config": {
     "grunt": "grunt",
