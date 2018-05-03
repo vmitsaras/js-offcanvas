@@ -9,9 +9,9 @@ module.exports = {
 	},
 	pkgd: {
 		src: [
-			"bower_components/js-utilities/utils.js",
-			"bower_components/js-trap-tab/trap-tab.js",
-			"bower_components/js-button/dist/_js/js-button.js",
+			"node_modules/js-utilities/utils.js",
+			"node_modules/js-trap-tab/trap-tab.js",
+			"node_modules/js-button/dist/_js/js-button.js",
 			"src/<%= pkg.name %>.js",
 			"src/<%= pkg.name %>-init.js",
 			"src/<%= pkg.name %>-trigger.js",
