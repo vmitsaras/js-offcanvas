@@ -59,7 +59,7 @@
 		if(!window.utils.supportTransition){
 			this._panelClasses.push( utils.createModifierClass(options.baseClass, options.supportNoTransitionsClass));
 		}
-		utils.cssModifiers(options.modifiers,panelClasses,options.baseClass );
+		utils.cssModifiers(options.modifiers,this._panelClasses,options.baseClass );
 		this.$element.attr(panelAttr).addClass( this._panelClasses.join( " " ) );
 
 		// Content-wrap
@@ -283,15 +283,16 @@
 		var self = this,
 			options = self.options,
 			offcanvasID = this.$element.attr('id'),
-			att = "data-offcanvas-trigger",
-			$triggerButton;
+			att = "data-offcanvas-trigger";
+			// $triggerButton;
 
 		if (!options.triggerButton) {
-			$triggerButton = $( "["+ att +"='" + offcanvasID + "']" );
+			this.$triggerBtn = $( "["+ att +"='" + offcanvasID + "']" );
 		} else {
-			$triggerButton = $(options.triggerButton);
+			this.$triggerBtn = $(options.triggerButton);
 		}
-		new window.componentNamespace.OffcanvasTrigger( $triggerButton[0], { "offcanvas": offcanvasID } ).init();
+		// TODO
+		new window.componentNamespace.OffcanvasTrigger( this.$triggerBtn[0], { "offcanvas": offcanvasID } ).init();
 	};
 
 	Offcanvas.prototype.setButton = function(trigger){
@@ -299,29 +300,36 @@
 	};
 
 	Offcanvas.prototype.destroy = function(){
+
+		this.$element.trigger( "destroy." + name );
 		if( this.isOpen ){
 			this.close();
 		}
 
-		// remove overlay
+		if (this.options.modal) {
 			this.$modal.remove();
+		}
 
-		// remove css-classes & attr
-		this.$element.removeData(componentName)
+		this.$element
+			// .removeData(componentName)
+			.removeData()
 			.removeClass( this._panelClasses.join( " " ) )
 			.removeAttr('tabindex')
 			.removeAttr('aria-hidden');
+		// TODO
+		if( this.$triggerBtn ){
+			this.$triggerBtn.button.destroy();
+		}
+
+		this.$element.off( "." + name );
+		$( doc ).off( "." + name);
+		$(window).off('.'+name);
 
 		this.element = null;
 		this.$element = null;
 		this.$modal = null;
 		this.$content = null;
 		this.transitionElement = null;
-
-		// remove event listeners
-		this.$element.off( "." + name );
-		$( doc ).off( "." + name);
-		$(window).off('.'+name);
 
 		// TODO destroy-method trigger in js-button
 	};

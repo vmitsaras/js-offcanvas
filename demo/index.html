@@ -10,59 +10,71 @@
     <script src="../vendor/modernizr.js"></script>
     <script src="../dist/_js/js-offcanvas.pkgd.js"></script>
     <script>
-        $( function(){
-            $( document ).on( "beforecreate.offcanvas", function( e ){
-                var dataOffcanvas = $( e.target ).data('offcanvas-component');
-                console.log(dataOffcanvas);
-                dataOffcanvas.onInit =  function() {
-                    console.log(this);
-                };
-            } );
-            $( document ).on( "create.offcanvas", function( e ){
-                var dataOffcanvas = $( e.target ).data('offcanvas-component');
-                console.log(dataOffcanvas);
-                dataOffcanvas.onOpen =  function() {
-                    console.log('Callback onOpen');
-                };
-                dataOffcanvas.onClose =  function() {
-                    console.log('Callback onClose');
-                };
+		$( function(){
+			$( document ).on( "beforecreate.offcanvas", function( e ){
+				var dataOffcanvas = $( e.target ).data('offcanvas-component');
+				console.log(dataOffcanvas);
+				dataOffcanvas.onInit =  function() {
+					console.log(this);
+				};
+			} );
+			$( document ).on( "create.offcanvas", function( e ){
+				var dataOffcanvas = $( e.target ).data('offcanvas-component');
+				console.log(dataOffcanvas);
+				dataOffcanvas.onOpen =  function() {
+					console.log('Callback onOpen');
+				};
+				dataOffcanvas.onClose =  function() {
+					console.log('Callback onClose');
+				};
 
-                $('.js-destroy').on('click', function () {
-                    dataOffcanvas.destroy();
-                });
+			} );
+			$( document ).on( "clicked.offcanvas-trigger clicked.offcanvas", function( e ){
+				var dataBtnText = $( e.target ).text();
+				console.log(e.type + '.' + e.namespace + ': ' + dataBtnText);
+			} );
+			$( document ).on( "open.offcanvas", function( e ){
+				var dataOffcanvasID = $( e.target ).attr('id');
+				console.log(e.type + ': #' + dataOffcanvasID);
+			} );
+			$( document ).on( "resizing.offcanvas", function( e ){
+				var dataOffcanvasID = $( e.target ).attr('id');
+				console.log(e.type + ': #' + dataOffcanvasID);
+			} );
+			$( document ).on( "close.offcanvas", function( e ){
+				var dataOffcanvasID = $( e.target ).attr('id');
+				console.log(e.type + ': #' + dataOffcanvasID);
+			} );
+			$( document ).on( "destroy.offcanvas", function( e ){
+				var dataOffcanvasID = $( e.target ).attr('id');
+				console.log(e.type + ': #' + dataOffcanvasID);
+			} );
+			$( '#top' ).on( "create.offcanvas", function( e ){
+				var api = $(this).data('offcanvas-component');
+				setTimeout(function(){
+					// dataOffcanvas.open();
+				}, 500);
 
-            } );
-            $( document ).on( "clicked.offcanvas-trigger clicked.offcanvas", function( e ){
-                var dataBtnText = $( e.target ).text();
-                console.log(e.type + '.' + e.namespace + ': ' + dataBtnText);
-            } );
-            $( document ).on( "open.offcanvas", function( e ){
-                var dataOffcanvasID = $( e.target ).attr('id');
-                console.log(e.type + ': #' + dataOffcanvasID);
-            } );
-            $( document ).on( "resizing.offcanvas", function( e ){
-                var dataOffcanvasID = $( e.target ).attr('id');
-                console.log(e.type + ': #' + dataOffcanvasID);
-            } );
-            $( document ).on( "close.offcanvas", function( e ){
-                var dataOffcanvasID = $( e.target ).attr('id');
-                console.log(e.type + ': #' + dataOffcanvasID);
-            } );
-            $( '#right' ).on( "create.offcanvas", function( e ){
-                var dataOffcanvas = $(this).data('offcanvas-component');
-                setTimeout(function(){
-                    //dataOffcanvas.open();
-                }, 500);
+				$('.js-destroy').one('click', function () {
+					api.destroy();
+					console.log(api);
+					console.log( $( '#top' ).data() );
+				});
+			} );
 
-            } );
+			$( '#left' ).offcanvas( {
+				modifiers: "left,overlay",
+				triggerButton: '.js-left'
+			} );
 
-            $( '#left' ).offcanvas( {
-                modifiers: "left,overlay",
-                triggerButton: '.js-left'
-            } );
-            $( document ).trigger( "enhance" );
-        });
+
+			$('.js-enhance').on('click', function () {
+				console.log('enhance');
+				$( document ).trigger( "enhance" );
+			});
+
+			$( document ).trigger( "enhance" );
+		});
     </script>
     <style>
         body {
@@ -123,6 +135,7 @@
         <a class="js-offcanvas-trigger" data-offcanvas-trigger="top" href="#top">Top</a>
         <a class="js-offcanvas-trigger" data-offcanvas-trigger="bottom" href="#bottom">Bottom</a>
         <button class="js-button js-destroy">Destroy Panels</button>
+        <button class="js-button js-enhance">Enhance Panels</button>
     </div>
 </main>
 

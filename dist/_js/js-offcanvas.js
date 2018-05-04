@@ -44,7 +44,6 @@
 
 	Offcanvas.prototype._addAttributes = function(){
 		var options = this.options,
-			panelClasses = [options.baseClass,utils.classes.isClosed],
 			panelAttr = {
 				tabindex: "-1",
 				"aria-hidden": !this.isOpen
@@ -53,11 +52,14 @@
 		if ( options.role) {
 			panelAttr.role = options.role;
 		}
+
+		this._panelClasses = [options.baseClass,utils.classes.isClosed];
+
 		if(!window.utils.supportTransition){
-			panelClasses.push( utils.createModifierClass(options.baseClass, options.supportNoTransitionsClass));
+			this._panelClasses.push( utils.createModifierClass(options.baseClass, options.supportNoTransitionsClass));
 		}
-		utils.cssModifiers(options.modifiers,panelClasses,options.baseClass );
-		this.$element.attr(panelAttr).addClass( panelClasses.join( " " ) );
+		utils.cssModifiers(options.modifiers,this._panelClasses,options.baseClass );
+		this.$element.attr(panelAttr).addClass( this._panelClasses.join( " " ) );
 
 		// Content-wrap
 		this.$content = $('.' + options.contentClass);
@@ -280,15 +282,15 @@
 		var self = this,
 			options = self.options,
 			offcanvasID = this.$element.attr('id'),
-			att = "data-offcanvas-trigger",
-			$triggerButton;
+			att = "data-offcanvas-trigger";
+			// $triggerButton;
 
 		if (!options.triggerButton) {
-			$triggerButton = $( "["+ att +"='" + offcanvasID + "']" );
+			this.$triggerBtn = $( "["+ att +"='" + offcanvasID + "']" );
 		} else {
-			$triggerButton = $(options.triggerButton);
+			this.$triggerBtn = $(options.triggerButton);
 		}
-		new window.componentNamespace.OffcanvasTrigger( $triggerButton[0], { "offcanvas": offcanvasID } ).init();
+		new window.componentNamespace.OffcanvasTrigger( this.$triggerBtn[0], { "offcanvas": offcanvasID } ).init();
 	};
 
 	Offcanvas.prototype.setButton = function(trigger){
@@ -296,11 +298,38 @@
 	};
 
 	Offcanvas.prototype.destroy = function(){
-		console.log('destroy method');
-		// TODO remove overlay
-		// TODO remove css-classes & attr
-		// TODO remove event listeners
-		// TODO implement destroy-method in js-button
+
+		this.$element.trigger( "destroy." + name );
+		if( this.isOpen ){
+			this.close();
+		}
+
+		if (this.options.modal) {
+			this.$modal.remove();
+		}
+
+		this.$element
+			// .removeData(componentName)
+			.removeData()
+			.removeClass( this._panelClasses.join( " " ) )
+			.removeAttr('tabindex')
+			.removeAttr('aria-hidden');
+
+		if( this.$triggerBtn ){
+			this.$triggerBtn.button.destroy();
+		}
+
+		this.$element.off( "." + name );
+		$( doc ).off( "." + name);
+		$(window).off('.'+name);
+
+		this.element = null;
+		this.$element = null;
+		this.$modal = null;
+		this.$content = null;
+		this.transitionElement = null;
+
+		// TODO destroy-method trigger in js-button
 	};
 
 	Offcanvas.prototype.defaults = {
