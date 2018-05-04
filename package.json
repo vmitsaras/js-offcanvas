@@ -42,15 +42,21 @@
     "grunt-gh-pages": "^1.0.0",
     "grunt-lintspaces": "^0.7.4",
     "grunt-mkdir": "^1.0.0",
-    "grunt-modernizr": "^1.0.2",
+    "grunt-modernizr": "^1.0.3",
     "grunt-postcss": "^0.8.0",
     "load-grunt-tasks": "^3.4.1",
     "matchdep": "^1.0.1",
     "qunitjs": "^1.22.0"
   },
+  "dependencies": {
+    "js-button": "^1.2.1",
+    "js-trap-tab": "*",
+    "js-utilities": "^1.0.1"
+  },
   "engines": {
     "node": ">=0.8.0",
-    "npm": ">=1.2.10"
+    "npm": ">=1.2.10",
+    "yarn": ">= 1.0.0"
   },
   "config": {
     "grunt": "grunt",

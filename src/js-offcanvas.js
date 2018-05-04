@@ -1,15 +1,15 @@
 /* global jQuery:true */
-;(function( w, $ ){
+;(function( window, $ ){
 	"use strict";
 
 	var name = "offcanvas",
 		componentName = name + "-component",
-		utils = w.utils,
-		doc = w.document;
+		utils = window.utils,
+		doc = window.document;
 
-	w.componentNamespace = w.componentNamespace || {};
+	window.componentNamespace = window.componentNamespace || {};
 
-	var Offcanvas = w.componentNamespace.Offcanvas = function( element,options ){
+	var Offcanvas = window.componentNamespace.Offcanvas = function( element,options ){
 		if( !element ){
 			throw new Error( "Element required to initialize object" );
 		}
@@ -45,7 +45,6 @@
 
 	Offcanvas.prototype._addAttributes = function(){
 		var options = this.options,
-			panelClasses = [options.baseClass,utils.classes.isClosed],
 			panelAttr = {
 				tabindex: "-1",
 				"aria-hidden": !this.isOpen
@@ -54,11 +53,14 @@
 		if ( options.role) {
 			panelAttr.role = options.role;
 		}
+
+		this._panelClasses = [options.baseClass,utils.classes.isClosed];
+
 		if(!w.utils.supportTransition){
-			panelClasses.push( utils.createModifierClass(options.baseClass, options.supportNoTransitionsClass));
+			this._panelClasses.push( utils.createModifierClass(options.baseClass, options.supportNoTransitionsClass));
 		}
 		utils.cssModifiers(options.modifiers,panelClasses,options.baseClass );
-		this.$element.attr(panelAttr).addClass( panelClasses.join( " " ) );
+		this.$element.attr(panelAttr).addClass( this._panelClasses.join( " " ) );
 
 		// Content-wrap
 		this.$content = $('.' + options.contentClass);
@@ -94,7 +96,7 @@
 	};
 
 	Offcanvas.prototype._trapTabKey = function() {
-		this.trapTabKey = new w.componentNamespace.TrapTabKey(this.element);
+		this.trapTabKey = new window.componentNamespace.TrapTabKey(this.element);
 		this.trapTabKey.init();
 	};
 
@@ -120,7 +122,7 @@
 		}
 		this.$closeBtn = this.$element.find('.'+options.closeButtonClass);
 		if( this.$closeBtn.length ){
-			this.closeBtn = new w.componentNamespace.Button(this.$closeBtn[0]);
+			this.closeBtn = new window.componentNamespace.Button(this.$closeBtn[0]);
 			this.closeBtn.init();
 			this.closeBtn.controls(this.$element.attr('id'));
 			utils.a11yclickBind(this.$closeBtn,closeOffcanvas,name);
@@ -289,7 +291,7 @@
 		} else {
 			$triggerButton = $(options.triggerButton);
 		}
-		new w.componentNamespace.OffcanvasTrigger( $triggerButton[0], { "offcanvas": offcanvasID } ).init();
+		new window.componentNamespace.OffcanvasTrigger( $triggerButton[0], { "offcanvas": offcanvasID } ).init();
 	};
 
 	Offcanvas.prototype.setButton = function(trigger){
@@ -297,10 +299,31 @@
 	};
 
 	Offcanvas.prototype.destroy = function(){
-		// TODO remove overlay
-		// TODO remove css-classes & attr
-		// TODO remove event listeners
-		// TODO implement destroy-method in js-button
+
+		if( this.isOpen ){
+			this.close();
+		}
+
+		// remove overlay
+			this.$modal.remove();
+
+		// remove css-classes & attr
+		this.$element.removeData(componentName)
+			.removeClass( this._panelClasses.join( " " ) )
+			.removeAttr('tabindex')
+			.removeAttr('aria-hidden');
+
+		this.element = null;
+		this.$element = null;
+		this.$modal = null;
+		this.$content = null;
+		this.transitionElement = null;
+
+		// remove event listeners
+		this.$element.off( "." + name );
+		$( doc ).off( "." + name);
+		$(window).off('.'+name);
+		// TODO destroy-method trigger in js-button
 	};
 
 	Offcanvas.prototype.defaults = {
