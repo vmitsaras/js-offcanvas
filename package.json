@@ -49,9 +49,9 @@
     "qunitjs": "^1.22.0"
   },
   "dependencies": {
-    "js-button": "^1.2.1",
+    "js-utilities": "*",
     "js-trap-tab": "*",
-    "js-utilities": "^1.0.1"
+    "js-button": "*"
   },
   "engines": {
     "node": ">=0.8.0",

@@ -56,7 +56,7 @@
 
 		this._panelClasses = [options.baseClass,utils.classes.isClosed];
 
-		if(!w.utils.supportTransition){
+		if(!window.utils.supportTransition){
 			this._panelClasses.push( utils.createModifierClass(options.baseClass, options.supportNoTransitionsClass));
 		}
 		utils.cssModifiers(options.modifiers,panelClasses,options.baseClass );
@@ -299,7 +299,6 @@
 	};
 
 	Offcanvas.prototype.destroy = function(){
-
 		if( this.isOpen ){
 			this.close();
 		}
@@ -323,6 +322,7 @@
 		this.$element.off( "." + name );
 		$( doc ).off( "." + name);
 		$(window).off('.'+name);
+
 		// TODO destroy-method trigger in js-button
 	};
 
