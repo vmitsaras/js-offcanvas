@@ -5,7 +5,7 @@
 	var name = "offcanvas",
 		componentName = name + "-component",
 		utils = window.utils,
-		doc = window.document;
+		doc = document;
 
 	window.componentNamespace = window.componentNamespace || {};
 
