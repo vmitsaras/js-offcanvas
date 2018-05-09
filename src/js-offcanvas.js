@@ -1,15 +1,15 @@
 /* global jQuery:true */
-;(function( w, $ ){
+;(function( window, $ ){
 	"use strict";
 
 	var name = "offcanvas",
 		componentName = name + "-component",
-		utils = w.utils,
+		utils = window.utils,
 		doc = document;
 
-	w.componentNamespace = w.componentNamespace || {};
+	window.componentNamespace = window.componentNamespace || {};
 
-	var Offcanvas = w.componentNamespace.Offcanvas = function( element,options ){
+	var Offcanvas = window.componentNamespace.Offcanvas = function( element,options ){
 		if( !element ){
 			throw new Error( "Element required to initialize object" );
 		}
@@ -54,7 +54,7 @@
 		if ( options.role) {
 			panelAttr.role = options.role;
 		}
-		if(!w.utils.supportTransition){
+		if(!utils.supportTransition){
 			panelClasses.push( utils.createModifierClass(options.baseClass, options.supportNoTransitionsClass));
 		}
 		utils.cssModifiers(options.modifiers,panelClasses,options.baseClass );
@@ -94,7 +94,7 @@
 	};
 
 	Offcanvas.prototype._trapTabKey = function() {
-		this.trapTabKey = new w.componentNamespace.TrapTabKey(this.element);
+		this.trapTabKey = new window.componentNamespace.TrapTabKey(this.element);
 		this.trapTabKey.init();
 	};
 
@@ -120,7 +120,7 @@
 		}
 		this.$closeBtn = this.$element.find('.'+options.closeButtonClass);
 		if( this.$closeBtn.length ){
-			this.closeBtn = new w.componentNamespace.Button(this.$closeBtn[0]);
+			this.closeBtn = new window.componentNamespace.Button(this.$closeBtn[0]);
 			this.closeBtn.init();
 			this.closeBtn.controls(this.$element.attr('id'));
 			utils.a11yclickBind(this.$closeBtn,closeOffcanvas,name);
@@ -289,7 +289,7 @@
 		} else {
 			$triggerButton = $(options.triggerButton);
 		}
-		new w.componentNamespace.OffcanvasTrigger( $triggerButton[0], { "offcanvas": offcanvasID } ).init();
+		new window.componentNamespace.OffcanvasTrigger( $triggerButton[0], { "offcanvas": offcanvasID } ).init();
 	};
 
 	Offcanvas.prototype.setButton = function(trigger){

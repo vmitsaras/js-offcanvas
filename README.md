@@ -27,7 +27,6 @@ jQuery accessible Offcanvas plugin, using ARIA
 
 ## Getting Started
 
-* Install with Bower: `bower install js-offcanvas --save`
 * Install with npm: `npm install js-offcanvas`
 * Install with yarn: `yarn add js-offcanvas`
 
@@ -233,7 +232,6 @@ $( document ).on( "clicked.offcanvas-trigger", function( e ){
 
 ## Dependencies
 * jQuery
-* Modernizr
 
 ---
 
