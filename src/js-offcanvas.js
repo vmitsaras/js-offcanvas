@@ -258,12 +258,22 @@
 
 	Offcanvas.prototype.resize = function(){
 		var self = this,ticking;
+		
+		var raf = (function(){
+			return  window.requestAnimationFrame       ||
+				window.webkitRequestAnimationFrame ||
+				window.mozRequestAnimationFrame    ||
+				function( callback ){
+					window.setTimeout(callback, 1000 / 60);
+				};
+		})();
+		
 		function update() {
 			ticking = false;
 		}
 		function requestTick() {
 			if(!ticking) {
-				utils.raf(update);
+				raf(update);
 			}
 			ticking = true;
 		}
