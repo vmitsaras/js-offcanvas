@@ -51,11 +51,9 @@
 			} );
 			$( '#top' ).on( "create.offcanvas", function( e ){
 				var api = $(this).data('offcanvas-component');
-				setTimeout(function(){
-					// dataOffcanvas.open();
-				}, 500);
 
-				$('.js-destroy').one('click', function () {
+                console.log(api);
+				$('.js-destroy').on('click', function () {
 					api.destroy();
 					console.log(api);
 					console.log( $( '#top' ).data() );
@@ -80,8 +78,10 @@
         body {
             overflow-x: hidden;
         }
-        .c-button:active, .c-button:focus {
-            outline: none;
+
+        *:focus {
+            outline: 2px dotted;
+            outline-offset: 2px;
         }
         .c-button.is-clicked {
             box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
@@ -148,7 +148,8 @@
 
 <aside class="js-offcanvas" data-offcanvas-options='{"modifiers":"top,fixed,overlay"}' id="top" role="complementary">
     <input>
-    <button class="js-offcanvas-close" data-button-options='{"modifiers":"m1,m2"}'>Close</button>
+    <a data-focus href="#">Test</a>
+    <button data-focus class="js-offcanvas-close" data-button-options='{"modifiers":"m1,m2"}'>Close</button>
 </aside>
 <aside class="js-offcanvas" data-offcanvas-options='{"modifiers":"bottom,fixed,overlay"}' id="bottom" role="complementary">
     <input>

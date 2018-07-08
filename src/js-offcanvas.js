@@ -302,6 +302,7 @@
 	Offcanvas.prototype.destroy = function(){
 
 		this.$element.trigger( "destroy." + name );
+
 		if( this.isOpen ){
 			this.close();
 		}
@@ -311,27 +312,23 @@
 		}
 
 		this.$element
-			// .removeData(componentName)
 			.removeData()
 			.removeClass( this._panelClasses.join( " " ) )
 			.removeAttr('tabindex')
 			.removeAttr('aria-hidden');
-		// TODO
+
 		if( this.$triggerBtn ){
-			this.$triggerBtn.button.destroy();
+			this.$triggerBtn
+				.removeData('offcanvas-trigger-component')
+				.off(".offcanvas")
+				.off(".offcanvas-trigger")
+				.data('button-component').destroy();
 		}
 
 		this.$element.off( "." + name );
 		$( doc ).off( "." + name);
 		$(window).off('.'+name);
 
-		this.element = null;
-		this.$element = null;
-		this.$modal = null;
-		this.$content = null;
-		this.transitionElement = null;
-
-		// TODO destroy-method trigger in js-button
 	};
 
 	Offcanvas.prototype.defaults = {
