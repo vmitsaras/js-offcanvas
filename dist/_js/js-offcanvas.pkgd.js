@@ -180,10 +180,11 @@
 			opts = self.options;
 
 		// get list of all children elements in given object
-		var o = self.$element.find('*');
+		var o = self.$element.find('*'),
+			focusEl = self.$element.find('[data-focus]');
 
 		// set the focus to the first keyboard focusable item
-		o.filter(opts.focusableElementsString).filter(':visible').first().focus();
+		focusEl.length ? focusEl.first().focus() : o.filter(opts.focusableElementsString).filter(':visible').first().focus();
 
 	};
 
@@ -235,7 +236,7 @@
 	};
 
 	TrapTabKey.prototype.defaults = {
-		focusableElementsString : "['data-focus'], a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]"
+		focusableElementsString : "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]"
 	};
 
 	TrapTabKey.defaults = TrapTabKey.prototype.defaults;

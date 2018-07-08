@@ -63,9 +63,10 @@
 		body {
 			overflow-x: hidden;
 		}
-	.c-button:active, .c-button:focus {
-		outline: none;
-	}
+    *:focus {
+        outline: 2px dotted;
+        outline-offset: 2px;
+    }
 	.c-button.is-clicked {
 		box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
 	}
@@ -129,7 +130,8 @@
 
 		<aside class="js-offcanvas" data-offcanvas-options='{"modifiers":"top,fixed,overlay"}' id="top" role="complementary">
 			<input>
-			<button data-focus="true" class="js-offcanvas-close" data-button-options='{"modifiers":"m1,m2"}'>Close</button>
+			<a data-focus href="#">Test</a>
+			<button data-focus class="js-offcanvas-close" data-button-options='{"modifiers":"m1,m2"}'>Close</button>
 		</aside>
 		<aside class="js-offcanvas" data-offcanvas-options='{"modifiers":"bottom,fixed,overlay"}' id="bottom" role="complementary">
 			<input>
