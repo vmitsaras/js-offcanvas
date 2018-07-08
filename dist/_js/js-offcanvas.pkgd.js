@@ -200,7 +200,7 @@
 
 			// get list of focusable items
 			var focusableItems;
-			focusableItems = o.filter(opts.focusableElementsString).filter(':visible')
+			focusableItems = o.filter(opts.focusableElementsString).filter(':visible');
 
 			// get currently focused item
 			var focusedItem;
@@ -208,7 +208,7 @@
 
 			// get the number of focusable items
 			var numberOfFocusableItems;
-			numberOfFocusableItems = focusableItems.length
+			numberOfFocusableItems = focusableItems.length;
 
 			// get the index of the currently focused item
 			var focusedItemIndex;
@@ -235,7 +235,7 @@
 	};
 
 	TrapTabKey.prototype.defaults = {
-		focusableElementsString : "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]"
+		focusableElementsString : "['data-focus'], a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]"
 	};
 
 	TrapTabKey.defaults = TrapTabKey.prototype.defaults;
