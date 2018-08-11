@@ -38,8 +38,8 @@ Include the `.css` and `.js` files in your site.
 ````
 ###### CDN
 ```html
-<script src="https://unpkg.com/js-offcanvas/dist/_js/js-offcanvas.pkgd.min.js"></script> 
-<link href="https://unpkg.com/js-offcanvas/dist/_css/prefixed/js-offcanvas.css" rel="stylesheet">
+<script src="https://unpkg.com/js-offcanvas@1.2.7/dist/_js/js-offcanvas.pkgd.min.js"></script> 
+<link href="https://unpkg.com/js-offcanvas@1.2.7/dist/_css/prefixed/js-offcanvas.css" rel="stylesheet">
 ```
 
 ##### HTML
