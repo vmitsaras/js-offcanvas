@@ -52,7 +52,6 @@
 		if ( options.role) {
 			panelAttr.role = options.role;
 		}
-
 		this._panelClasses = [options.baseClass,utils.classes.isClosed];
 
 		if(!window.utils.supportTransition){
@@ -301,6 +300,7 @@
 			this.$triggerBtn = $(options.triggerButton);
 		}
 		new window.componentNamespace.OffcanvasTrigger( this.$triggerBtn[0], { "offcanvas": offcanvasID } ).init();
+
 	};
 
 	Offcanvas.prototype.setButton = function(trigger){

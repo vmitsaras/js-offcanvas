@@ -300,7 +300,6 @@
 		} else {
 			this.$triggerBtn = $(options.triggerButton);
 		}
-    
 		new window.componentNamespace.OffcanvasTrigger( this.$triggerBtn[0], { "offcanvas": offcanvasID } ).init();
 
 	};
