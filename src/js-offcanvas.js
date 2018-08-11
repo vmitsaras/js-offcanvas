@@ -45,7 +45,6 @@
 
 	Offcanvas.prototype._addAttributes = function(){
 		var options = this.options,
-			panelClasses = [options.baseClass,utils.classes.isClosed],
 			panelAttr = {
 				tabindex: "-1",
 				"aria-hidden": !this.isOpen
@@ -54,11 +53,13 @@
 		if ( options.role) {
 			panelAttr.role = options.role;
 		}
-		if(!utils.supportTransition){
-			panelClasses.push( utils.createModifierClass(options.baseClass, options.supportNoTransitionsClass));
+		this._panelClasses = [options.baseClass,utils.classes.isClosed];
+
+		if(!window.utils.supportTransition){
+			this._panelClasses.push( utils.createModifierClass(options.baseClass, options.supportNoTransitionsClass));
 		}
-		utils.cssModifiers(options.modifiers,panelClasses,options.baseClass );
-		this.$element.attr(panelAttr).addClass( panelClasses.join( " " ) );
+		utils.cssModifiers(options.modifiers,this._panelClasses,options.baseClass );
+		this.$element.attr(panelAttr).addClass( this._panelClasses.join( " " ) );
 
 		// Content-wrap
 		this.$content = $('.' + options.contentClass);
@@ -291,19 +292,53 @@
 		var self = this,
 			options = self.options,
 			offcanvasID = this.$element.attr('id'),
-			att = "data-offcanvas-trigger",
-			$triggerButton;
+			att = "data-offcanvas-trigger";
+			// $triggerButton;
 
 		if (!options.triggerButton) {
-			$triggerButton = $( "["+ att +"='" + offcanvasID + "']" );
+			this.$triggerBtn = $( "["+ att +"='" + offcanvasID + "']" );
 		} else {
-			$triggerButton = $(options.triggerButton);
+			this.$triggerBtn = $(options.triggerButton);
 		}
-		new window.componentNamespace.OffcanvasTrigger( $triggerButton[0], { "offcanvas": offcanvasID } ).init();
+    
+		new window.componentNamespace.OffcanvasTrigger( this.$triggerBtn[0], { "offcanvas": offcanvasID } ).init();
+
 	};
 
 	Offcanvas.prototype.setButton = function(trigger){
 		this.$element.data( componentName + "-trigger", trigger );
+	};
+
+	Offcanvas.prototype.destroy = function(){
+
+		this.$element.trigger( "destroy." + name );
+
+		if( this.isOpen ){
+			this.close();
+		}
+
+		if (this.options.modal) {
+			this.$modal.remove();
+		}
+
+		this.$element
+			.removeData()
+			.removeClass( this._panelClasses.join( " " ) )
+			.removeAttr('tabindex')
+			.removeAttr('aria-hidden');
+
+		if( this.$triggerBtn ){
+			this.$triggerBtn
+				.removeData('offcanvas-trigger-component')
+				.off(".offcanvas")
+				.off(".offcanvas-trigger")
+				.data('button-component').destroy();
+		}
+
+		this.$element.off( "." + name );
+		$( doc ).off( "." + name);
+		$(window).off('.'+name);
+
 	};
 
 	Offcanvas.prototype.defaults = {

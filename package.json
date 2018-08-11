@@ -42,7 +42,7 @@
     "grunt-gh-pages": "^1.0.0",
     "grunt-lintspaces": "^0.7.4",
     "grunt-mkdir": "^1.0.0",
-    "grunt-modernizr": "^1.0.2",
+    "grunt-modernizr": "^1.0.3",
     "grunt-postcss": "^0.8.0",
     "load-grunt-tasks": "^3.4.1",
     "matchdep": "^1.0.1",
@@ -51,7 +51,6 @@
   "dependencies": {
     "js-utilities": "*",
     "js-trap-tab": "*",
-    "js-ripple": "*",
     "js-button": "*"
   },
   "engines": {
