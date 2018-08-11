@@ -9,10 +9,9 @@
  * Offcanvas-content-wrap
 */
 .c-offcanvas-content-wrap {
-  position: relative;
+  //position: relative;
+  //overflow: hidden;
   z-index: index($elements, offcanvas-content-wrap);
-  overflow: hidden;
-  background: #fff;
 }
 
 /**
@@ -144,7 +143,6 @@
 */
 @if ($offcanvas-enable-reveal== true) {
   .c-offcanvas-content-wrap{
-    @extend %u-ha;
     @extend %u-offcanvas-animate;
     z-index: index($elements, offcanvas-content-wrap);
   }
@@ -195,7 +193,6 @@
     }
   }
   .c-offcanvas-content-wrap{
-    @extend %u-ha;
     @extend %u-offcanvas-animate;
     z-index: index($elements, offcanvas-content-wrap);
   }
