@@ -4,7 +4,7 @@
 	var name = "offcanvas",
 		componentName = name + "-component",
 		utils = window.utils,
-		doc = window.document;
+		doc = document;
 
 	window.componentNamespace = window.componentNamespace || {};
 
@@ -259,12 +259,22 @@
 
 	Offcanvas.prototype.resize = function(){
 		var self = this,ticking;
+
+		var raf = (function(){
+			return  window.requestAnimationFrame   ||
+				window.webkitRequestAnimationFrame ||
+				window.mozRequestAnimationFrame    ||
+				function( callback ){
+					window.setTimeout(callback, 1000 / 60);
+				};
+		})();
+
 		function update() {
 			ticking = false;
 		}
 		function requestTick() {
 			if(!ticking) {
-				utils.raf(update);
+				raf(update);
 			}
 			ticking = true;
 		}
@@ -290,7 +300,6 @@
 		} else {
 			this.$triggerBtn = $(options.triggerButton);
 		}
-		// TODO
 		new window.componentNamespace.OffcanvasTrigger( this.$triggerBtn[0], { "offcanvas": offcanvasID } ).init();
 	};
 
