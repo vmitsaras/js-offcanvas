@@ -52,7 +52,7 @@
 
 /* line 48, ../../src/js-offcanvas.scss */
 .c-offcanvas--overlay {
-  z-index: 6;
+  z-index: 1080;
 }
 
 /* line 52, ../../src/js-offcanvas.scss */
@@ -69,7 +69,7 @@
   top: 0;
   height: 100%;
   width: 100%;
-  z-index: 5;
+  z-index: 1079;
   left: -100%;
   background-color: transparent;
   transition: background-color 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
@@ -84,12 +84,16 @@
 .c-offcanvas-bg.is-closed {
   visibility: hidden;
 }
+/* line 78, ../../src/js-offcanvas.scss */
+.c-offcanvas-bg--closing.is-animating {
+  background: transparent;
+}
 
 /**
  * Position Left
  *
 */
-/* line 85, ../../src/js-offcanvas.scss */
+/* line 88, ../../src/js-offcanvas.scss */
 .c-offcanvas--left {
   height: 100%;
   width: 17em;
@@ -100,7 +104,7 @@
  *  Position Right
  *
 */
-/* line 114, ../../src/js-offcanvas.scss */
+/* line 117, ../../src/js-offcanvas.scss */
 .c-offcanvas--right {
   height: 100%;
   width: 17em;
@@ -112,7 +116,7 @@
  * Position Top
  *
 */
-/* line 126, ../../src/js-offcanvas.scss */
+/* line 129, ../../src/js-offcanvas.scss */
 .c-offcanvas--top {
   left: 0;
   right: 0;
@@ -127,7 +131,7 @@
  * Position Bottom
  *
 */
-/* line 136, ../../src/js-offcanvas.scss */
+/* line 139, ../../src/js-offcanvas.scss */
 .c-offcanvas--bottom {
   top: auto;
   left: 0;
@@ -143,7 +147,7 @@
  * Reveal
  *
 */
-/* line 145, ../../src/js-offcanvas.scss */
+/* line 148, ../../src/js-offcanvas.scss */
 .c-offcanvas-content-wrap {
   z-index: 3;
 }
@@ -157,7 +161,7 @@
   transform: translate3d(-17em, 0, 0);
 }
 
-/* line 163, ../../src/js-offcanvas.scss */
+/* line 166, ../../src/js-offcanvas.scss */
 .c-offcanvas--reveal {
   z-index: 0;
   transform: translate3d(0, 0, 0);
@@ -176,16 +180,16 @@
  * Push
  *
 */
-/* line 189, ../../src/js-offcanvas.scss */
+/* line 192, ../../src/js-offcanvas.scss */
 .c-offcanvas--push {
   z-index: 6;
 }
-/* line 191, ../../src/js-offcanvas.scss */
+/* line 194, ../../src/js-offcanvas.scss */
 .c-offcanvas--push--opening {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
-/* line 195, ../../src/js-offcanvas.scss */
+/* line 198, ../../src/js-offcanvas.scss */
 .c-offcanvas-content-wrap {
   z-index: 3;
 }

@@ -147,6 +147,7 @@
 			this._addClasses(this.$content,this.isOpen,true);
 			if (options.modal) {
 				this._addClasses(this.$modal,this.isOpen,true);
+				this.$modal.addClass(utils.createModifierClass(options.modalClass,'opening'));
 			}
 
 			this.$element.attr( "aria-hidden", "false" )
@@ -162,6 +163,7 @@
 				self._addClasses(self.$content,self.isOpen,false);
 				if (options.modal) {
 					self._addClasses(self.$modal,self.isOpen,false);
+					self.$modal.removeClass(utils.createModifierClass(options.modalClass,'opening'));
 				}
 				self.$element.removeClass(utils.createModifierClass(options.baseClass,'opening'));
 			} );
@@ -191,6 +193,7 @@
 
 		if (this.options.modal) {
 			this._addClasses(this.$modal,this.isOpen,true);
+			this.$modal.addClass(utils.createModifierClass(options.modalClass,'closing'));
 		}
 
 		this.$element.attr( "aria-hidden", "true" )
@@ -209,6 +212,7 @@
 
 			if (self.options.modal) {
 				self._addClasses(self.$modal,self.isOpen,false);
+				self.$modal.removeClass(utils.createModifierClass(options.modalClass,'closing'));
 			}
 
 			self.$content.removeClass( self._contentOpenClasses.join( " " ) );

@@ -46,7 +46,7 @@
 }
 
 .c-offcanvas--overlay {
-  z-index: index($elements, offcanvas);
+  z-index: 1080;
 }
 
 .c-offcanvas--reveal {
@@ -61,7 +61,7 @@
   top: 0;
   height: 100%;
   width: 100%;
-  z-index: index($elements, offcanvas-overlay);
+  z-index: 1079;
   left: -100%;
   background-color: transparent;
   transition: background-color 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
@@ -74,6 +74,9 @@
   }
 
   &.is-closed {visibility: hidden}
+  &--closing {
+    &.is-animating{background: transparent;}
+  }
 }
 
 /**
