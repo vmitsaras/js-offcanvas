@@ -20,7 +20,11 @@
     "url": "http://vasilis.co"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "clean": "rm -Rf node_modules/ && rm -f ./package-lock.json && npm cache clean -f",
+    "clean_windows": "IF EXIST node_modules rd /s /q node_modules && IF EXIST package-lock.json DEL package-lock.json && npm cache clean -f",
+    "rebuild": "npm run clean && npm i",
+    "rebuild_windows": "npm run clean_windows && npm i"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.3",

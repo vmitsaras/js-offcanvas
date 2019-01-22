@@ -54,3 +54,4 @@ Temporary Items
 *node_modules*
 *bower_components*
 
+package-lock.json
