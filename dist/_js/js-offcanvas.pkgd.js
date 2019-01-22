@@ -100,7 +100,7 @@
 	utils.cssModifiers = function( modifiers, cssClasses, baseClass ){
 		var arr = modifiers.split(",");
 		for(var i=0, l = arr.length; i < l; i++){
-			cssClasses.push( utils.createModifierClass(baseClass,arr[i]) );
+			cssClasses.push( utils.createModifierClass(baseClass,arr[i].trim()) );
 		}
 	};
 
