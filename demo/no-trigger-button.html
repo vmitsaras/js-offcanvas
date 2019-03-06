@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="support-no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>js-Offcanvas without triggerButton</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link rel="stylesheet" href="../dist/_css/prefixed/js-offcanvas.css">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="../vendor/modernizr.js"></script>
+    <script src="../dist/_js/js-offcanvas.pkgd.js"></script>
+    <script>
+		$( function(){
+
+
+			$( document ).on( "create.offcanvas", function( e ){
+				var dataOffcanvas = $( e.target ).data('offcanvas-component');
+				console.log(dataOffcanvas);
+				dataOffcanvas.onOpen =  function() {
+					console.log('Callback onOpen');
+				};
+				dataOffcanvas.onClose =  function() {
+					console.log('Callback onClose');
+				};
+
+			} );
+
+			var leftOffcanvas;
+			function openOffcanvas () {
+				leftOffcanvas.open();
+            }
+            window.openOffcanvas = openOffcanvas;
+
+			$( '#left' ).on( "create.offcanvas", function( e ){
+				leftOffcanvas = $(this).data('offcanvas-component');
+				console.log(leftOffcanvas);
+			} );
+
+			$('.js-open-offcanvas').on('click', function () {
+				openOffcanvas();
+			});
+
+			$( document ).trigger( "enhance" );
+		});
+    </script>
+    <style>
+        .o-wrapper {
+            max-width:960px;
+            margin: auto;
+        }
+        *:focus {
+            outline: 2px dotted;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<main class="c-offcanvas-content-wrap" role="main">
+    <div class="o-wrapper">
+        <h1>Offcanvas without triggerButton</h1>
+        <button class="js-open-offcanvas">offcanvas.open();</button>
+        <button class="js-open-offcanvas">offcanvas.open();</button>
+        <pre>
+            <code>
+
+      var leftOffcanvas;
+
+      $( '#left' ).on( "create.offcanvas", function( e ){
+            leftOffcanvas = $(this).data('offcanvas-component');
+            console.log(leftOffcanvas);
+        } );
+
+        function openOffcanvas () {
+            leftOffcanvas.open();
+        }
+        </code>
+        </pre>
+    </div>
+</main>
+
+
+<aside class="js-offcanvas" data-offcanvas-options='{"modifiers":"left, overlay"}' id="left" role="complementary">
+    <input>
+    <button class="js-offcanvas-close">Close</button>
+</aside>
+
+</body>
+</html>

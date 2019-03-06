@@ -135,9 +135,6 @@
 			if (options.resize) {
 				this.resize();
 			}
-			if( !this.$trigger ){
-				this.$trigger = this.$element.data( componentName + "-trigger" );
-			}
 			if( doc.activeElement ){
 				this.lastFocus = doc.activeElement;
 			}
@@ -295,17 +292,12 @@
 	Offcanvas.prototype._initTrigger = function() {
 		var self = this,
 			options = self.options,
-			offcanvasID = this.$element.attr('id'),
-			att = "data-offcanvas-trigger";
-			// $triggerButton;
+			offcanvasID = this.$element.attr('id');
 
-		if (!options.triggerButton) {
-			this.$triggerBtn = $( "["+ att +"='" + offcanvasID + "']" );
-		} else {
+		if (options.triggerButton ) {
 			this.$triggerBtn = $(options.triggerButton);
+			new window.componentNamespace.OffcanvasTrigger(this.$triggerBtn[0], {"offcanvas": offcanvasID}).init();
 		}
-		new window.componentNamespace.OffcanvasTrigger( this.$triggerBtn[0], { "offcanvas": offcanvasID } ).init();
-
 	};
 
 	Offcanvas.prototype.setButton = function(trigger){
@@ -320,11 +312,7 @@
 			this.close();
 		}
 
-		if (this.options.modal) {
-			this.$modal.remove();
-		}
-
-		this.$element
+			this.$element
 			.removeData()
 			.removeClass( this._panelClasses.join( " " ) )
 			.removeAttr('tabindex')
