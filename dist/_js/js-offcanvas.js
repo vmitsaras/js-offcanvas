@@ -171,9 +171,9 @@
 			if( this.onOpen && typeof this.onOpen === 'function' ) {
 				this.onOpen.call(this.$element);
 			}
-			this.$element.trigger( "open." + name );
 			// close on ESC
 			this._trapTabEscKey();
+			this.$element.trigger( "open." + name );
 		}
 	};
 
