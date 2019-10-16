@@ -136,6 +136,7 @@
 			}
 			if( doc.activeElement ){
 				this.lastFocus = doc.activeElement;
+				this.lastFocusTrigger = $(this.lastFocus).data( "button-component");
 			}
 			this.isOpen = true;
 			$('html, body').addClass(this._bodyOpenClasses.join(" "));
@@ -166,6 +167,9 @@
 			} );
 			if( this.$trigger ){
 				this.$trigger.button._isExpanded(true);
+			}
+			if(this.lastFocusTrigger) {
+				this.lastFocusTrigger._isExpanded(true);
 			}
 			// callback on open
 			if( this.onOpen && typeof this.onOpen === 'function' ) {
@@ -202,6 +206,12 @@
 		if( self.$trigger ){
 			self.$trigger.button._isExpanded(false);
 		}
+
+		if(this.lastFocusTrigger) {
+			this.lastFocusTrigger._isExpanded(false);
+			this.lastFocusTrigger = null;
+		}
+
 		utils.onEndTransition ( this.transitionElement, function() {
 
 			self._addClasses(self.$element,self.isOpen,false);
