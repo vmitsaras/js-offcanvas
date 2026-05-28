@@ -1,4 +1,6 @@
-# js-offcanvas
+# js-offcanvas v2
+
+[![Downloads](https://img.shields.io/npm/dt/js-offcanvas.svg)](https://www.npmjs.com/package/js-offcanvas) [![Version](https://img.shields.io/npm/v/js-offcanvas.svg)](https://www.npmjs.com/package/js-offcanvas) [![License](https://img.shields.io/npm/l/js-offcanvas.svg)](https://www.npmjs.com/package/js-offcanvas)
 
 An accessible, standards-compliant off-canvas navigation drawer built as a vanilla JavaScript class.
 
