@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>js-offcanvas Demo | Vasileios Mitsaras</title>
+    <link rel="stylesheet" href="./demo.css">
+    <link rel="stylesheet" href="./src/js-offcanvas.css">
+
+</head>
+<body>
+
+<main>
+
+    <h1>js-offcanvas Demo <small>v2</small></h1>
+
+    <button class="js-a11y-offcanvas" type="button">Open left panel</button>
+    <button class="js-a11y-offcanvas-right" type="button">Open right panel</button>
+    <button class="js-a11y-offcanvas-top" type="button">Open top panel</button>
+    <button class="js-a11y-offcanvas-bottom" type="button">Open bottom panel</button>
+
+
+</main>
+
+<aside class="js-offcanvas" id="a11yOffcanvas" data-offcanvas animation-open="fadeInLeft" animation-close="fadeOutLeft"
+                   button-selector=".js-a11y-offcanvas"
+                   overlay-selector=".js-a11y-offcanvas-overlay"
+                   position="left"
+                   z-index="99"
+                   width="17em" height="100%" duration="0.2s"
+                   aria-labelledby="offcanvasLeftLabel">
+    <div>
+        <h2 id="offcanvasLeftLabel">Offcanvas Left</h2>
+        <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+            <li><a href="#">Link 4</a></li>
+        </ul>
+        <button data-offcanvas-close type="button">close</button>
+    </div>
+</aside>
+
+<div class="js-offcanvas-overlay js-a11y-offcanvas-overlay" data-offcanvas-overlay></div>
+
+<aside class="js-offcanvas" id="a11yOffcanvasRight" data-offcanvas animation-open="fadeInRight" animation-close="fadeOutRight" button-selector=".js-a11y-offcanvas-right"
+                   position="right" aria-labelledby="offcanvasRightLabel">
+    <div>
+        <h2 id="offcanvasRightLabel">Offcanvas Right</h2>
+        <form action="#">
+            <label class="sr-only" for="searchInput">Search</label>
+            <input id="searchInput" type="search" placeholder="Search with data-autofocus" data-autofocus>
+            <label for="searchSelect">Select an option:</label>
+            <select id="searchSelect">
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+        <button data-offcanvas-close type="button">close</button>
+    </div>
+</aside>
+
+<aside class="js-offcanvas" id="a11yOffcanvasTop" data-offcanvas animation-open="fadeInDown" animation-close="fadeOutUp"
+                   button-selector=".js-a11y-offcanvas-top"
+                   position="top" aria-labelledby="offcanvasTopLabel">
+    <div>
+        <h2 id="offcanvasTopLabel">Offcanvas Top</h2>
+        <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#" data-autofocus>Link Autofocus</a></li>
+        </ul>
+        <button data-offcanvas-close type="button">close</button>
+    </div>
+</aside>
+
+<aside class="js-offcanvas" id="a11yOffcanvasBottom" data-offcanvas animation-open="fadeInUp" animation-close="fadeOutDown"
+                   button-selector=".js-a11y-offcanvas-bottom"
+                   position="bottom" aria-labelledby="offcanvasBottomLabel">
+    <div>
+        <h2 id="offcanvasBottomLabel">Offcanvas Bottom</h2>
+        <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+        </ul>
+        <button data-offcanvas-close type="button">close</button>
+    </div>
+</aside>
+
+<footer>
+    <a href="https://github.com/vmitsaras/js-offcanvas" target="_blank" rel="noopener noreferrer">
+        View on GitHub
+        <span class="sr-only">(opens in a new tab)</span>
+    </a>
+
+    <p>
+        Created by
+        <a href="https://www.linkedin.com/in/vasilis-mitsaras/" target="_blank" rel="noopener noreferrer">
+            Vasileios Mitsaras
+            <span class="sr-only">(opens in a new tab)</span>
+        </a>
+    </p>
+</footer>
+
+
+<script type="module" src="./src/js-offcanvas.js"></script>
+
+</body>
+</html>
