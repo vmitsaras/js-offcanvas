@@ -43,6 +43,47 @@ describe('js-offcanvas', () => {
     expect(trigger.getAttribute('aria-expanded')).toBe('false');
   });
 
+  it('preserves existing role and tabindex semantics', () => {
+    const trigger = document.createElement('button');
+    trigger.id = 'trigger';
+
+    const overlay = document.createElement('div');
+    overlay.id = 'overlay';
+    overlay.className = 'js-offcanvas-overlay';
+    overlay.setAttribute('data-offcanvas-overlay', '');
+
+    const offcanvas = document.createElement('aside');
+    offcanvas.className = 'js-offcanvas';
+    offcanvas.setAttribute('data-offcanvas', '');
+    offcanvas.setAttribute('button-selector', '#trigger');
+    offcanvas.setAttribute('overlay-selector', '#overlay');
+    offcanvas.setAttribute('role', 'complementary');
+    offcanvas.setAttribute('tabindex', '-2');
+
+    document.body.append(trigger, overlay, offcanvas);
+    JsOffcanvasOverlay.initAll();
+    JsOffcanvas.initAll();
+
+    expect(offcanvas.getAttribute('role')).toBe('complementary');
+    expect(offcanvas.getAttribute('tabindex')).toBe('-2');
+
+    offcanvas.open();
+    offcanvas.close();
+
+    expect(offcanvas.getAttribute('tabindex')).toBe('-2');
+  });
+
+  it('removes the temporary tabindex when none was provided by the author', () => {
+    const { offcanvas } = setup();
+
+    expect(offcanvas.getAttribute('tabindex')).toBe('-1');
+
+    offcanvas.open();
+    offcanvas.close();
+
+    expect(offcanvas.hasAttribute('tabindex')).toBe(false);
+  });
+
   it('initializes offcanvas and overlay markup through the package entrypoint', () => {
     const trigger = document.createElement('button');
     trigger.id = 'entry-trigger';
@@ -358,6 +399,24 @@ describe('js-offcanvas', () => {
     expect(outside.inert).toBe(true);
   });
 
+  it('removes trap focus before restoring focus after close', () => {
+    const { offcanvas, instance } = setup();
+    const order = [];
+
+    vi.spyOn(instance, 'removeTrapFocus').mockImplementation(() => {
+      order.push('removeTrapFocus');
+    });
+
+    vi.spyOn(instance, '_restoreFocusAfterClose').mockImplementation(() => {
+      order.push('restoreFocus');
+    });
+
+    offcanvas.open();
+    offcanvas.close();
+
+    expect(order).toEqual(['removeTrapFocus', 'restoreFocus']);
+  });
+
   it('keeps the Tab focus loop active when inert is supported', () => {
     const { offcanvas, instance } = setup();
     const rafSpy = vi.spyOn(window, 'requestAnimationFrame').mockImplementation(() => 0);
@@ -374,6 +433,47 @@ describe('js-offcanvas', () => {
     offcanvas.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true }));
 
     expect(lastFocusSpy).toHaveBeenCalledTimes(1);
+    rafSpy.mockRestore();
+  });
+
+  it('excludes negative tabindex values from the focusable element list', () => {
+    const { offcanvas, instance } = setup();
+    const first = document.createElement('button');
+    const hiddenByTabindex = document.createElement('button');
+    const last = document.createElement('button');
+
+    hiddenByTabindex.setAttribute('tabindex', '-2');
+    offcanvas.innerHTML = '';
+    offcanvas.append(first, hiddenByTabindex, last);
+
+    const focusable = instance._getFocusableElements();
+
+    expect(focusable).toContain(first);
+    expect(focusable).toContain(last);
+    expect(focusable).not.toContain(hiddenByTabindex);
+  });
+
+  it('wraps focus with Tab and Shift+Tab while skipping negative tabindex elements', () => {
+    const { offcanvas } = setup();
+    const rafSpy = vi.spyOn(window, 'requestAnimationFrame').mockImplementation(() => 0);
+    const first = document.createElement('button');
+    const hiddenByTabindex = document.createElement('button');
+    const last = document.createElement('button');
+
+    hiddenByTabindex.setAttribute('tabindex', '-3');
+    offcanvas.innerHTML = '';
+    offcanvas.append(first, hiddenByTabindex, last);
+
+    offcanvas.open();
+
+    last.focus();
+    offcanvas.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true }));
+    expect(document.activeElement).toBe(first);
+
+    first.focus();
+    offcanvas.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true }));
+    expect(document.activeElement).toBe(last);
+
     rafSpy.mockRestore();
   });
 
@@ -439,12 +539,23 @@ describe('js-offcanvas', () => {
   });
 
   it('cleans up listeners and instance references on destroy', () => {
-    const { offcanvas, trigger, instance } = setup();
+    const { offcanvas, overlay, trigger, instance } = setup();
     const disconnectSpy = vi.spyOn(instance._observer, 'disconnect');
+    const outside = document.createElement('div');
+    outside.className = 'outside-target';
+    outside.inert = false;
+    offcanvas.setAttribute('inert-selector', '.outside-target');
+    instance._supportsInert = true;
+    document.body.append(outside);
 
     offcanvas.open();
     const beforeDestroyIsHidden = offcanvas.isHidden;
     const beforeDestroyOpenAttribute = offcanvas.hasAttribute('open');
+    const beforeDestroyAriaModal = offcanvas.getAttribute('aria-modal');
+    const beforeDestroyOverlayOpenAttribute = overlay.hasAttribute('open');
+    const beforeDestroyOverlayAriaHidden = overlay.getAttribute('aria-hidden');
+    const beforeDestroyTriggerExpanded = trigger.getAttribute('aria-expanded');
+
     offcanvas.destroy();
     trigger.click();
 
@@ -452,5 +563,10 @@ describe('js-offcanvas', () => {
     expect(offcanvas.jsOffcanvas).toBeUndefined();
     expect(offcanvas.isHidden).toBe(beforeDestroyIsHidden);
     expect(offcanvas.hasAttribute('open')).toBe(beforeDestroyOpenAttribute);
+    expect(offcanvas.getAttribute('aria-modal')).toBe(beforeDestroyAriaModal);
+    expect(overlay.hasAttribute('open')).toBe(beforeDestroyOverlayOpenAttribute);
+    expect(overlay.getAttribute('aria-hidden')).toBe(beforeDestroyOverlayAriaHidden);
+    expect(trigger.getAttribute('aria-expanded')).toBe(beforeDestroyTriggerExpanded);
+    expect(outside.inert).toBe(false);
   });
 });

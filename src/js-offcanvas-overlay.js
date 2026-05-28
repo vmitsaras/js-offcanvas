@@ -77,7 +77,7 @@ class JsOffcanvasOverlay {
     _init() {
         this.element.setAttribute('aria-hidden', this.element.hasAttribute('open') ? 'false' : 'true');
 
-        if (!this.element.hasAttribute('class')) {
+        if (!this.element.classList.contains('js-offcanvas-overlay')) {
             this.element.classList.add('js-offcanvas-overlay');
         }
     }

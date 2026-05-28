@@ -2,7 +2,7 @@ import JsOffcanvasOverlay from './js-offcanvas-overlay.js';
 
 const OFFCANVAS_SELECTOR = '.js-offcanvas, [data-offcanvas]';
 const INSTANCE_KEY = 'jsOffcanvas';
-const REINIT_ATTRIBUTES = ['button-selector', 'overlay-selector', 'inert-selector'];
+const REINIT_ATTRIBUTES = ['button-selector', 'overlay-selector', 'inert-selector', 'animation', 'animation-open', 'animation-close'];
 const PROXY_METHODS = [
     'open',
     'close',
@@ -56,6 +56,7 @@ class JsOffcanvas {
         this._pendingTransitionCleanup = null;
         this._backupFocusedElem = null;
         this._supportsInert = 'inert' in HTMLElement.prototype;
+        this._hasTemporaryTabindex = false;
 
         this._trapFocusFn = (event) => {
             if (event.key !== 'Tab') return;
@@ -104,6 +105,7 @@ class JsOffcanvas {
             'button-selector',
             'overlay-selector',
             'inert-selector',
+            'animation',
             'width',
             'height',
             'duration',
@@ -138,11 +140,13 @@ class JsOffcanvas {
     }
 
     /**
-     * Get the animation attribute.
-     * @return {string|null} The animation attribute.
+     * Determine whether animation mode is enabled via attribute presence.
+     * @return {boolean} True when animation mode is enabled.
      */
     get useAnimation() {
-        return this.getAttribute('animation-open') || this.getAttribute('animation-close');
+        return this.hasAttribute('animation')
+            || this.hasAttribute('animation-open')
+            || this.hasAttribute('animation-close');
     }
 
     /**
@@ -419,7 +423,7 @@ class JsOffcanvas {
      * @param {string|null} value - The value of the CSS variable.
      */
     _setProperty(varName, value) {
-        if (value === null) {
+        if (value === null || value === '') {
             this.element.style.removeProperty(varName);
             return;
         }
@@ -458,6 +462,12 @@ class JsOffcanvas {
         ].join(', ');
 
         return this._querySelectorAll(focusableSelector).filter(el => {
+            const tabIndexAttr = el.getAttribute('tabindex');
+
+            if (tabIndexAttr !== null && Number(tabIndexAttr) < 0) {
+                return false;
+            }
+
             const style = window.getComputedStyle(el);
             return style.display !== 'none' && style.visibility !== 'hidden';
         });
@@ -467,8 +477,16 @@ class JsOffcanvas {
      * Enhance the markup of the component.
      */
     _enhanceMarkup() {
-        this.setAttribute('tabindex', '-1');
-        this.setAttribute('role', 'dialog');
+        if (!this.hasAttribute('tabindex')) {
+            this.setAttribute('tabindex', '-1');
+            this._hasTemporaryTabindex = true;
+        } else if (!(this._hasTemporaryTabindex && this.getAttribute('tabindex') === '-1')) {
+            this._hasTemporaryTabindex = false;
+        }
+
+        if (!this.hasAttribute('role')) {
+            this.setAttribute('role', 'dialog');
+        }
     }
 
     /**
@@ -599,7 +617,6 @@ class JsOffcanvas {
      * @private
      */
     _setOpenState() {
-        this.setAttribute('tabindex', '0');
         this.setAttribute('aria-modal', 'true');
         this.setAttribute('open', '');
         this.setTriggerExpanded(true);
@@ -696,11 +713,13 @@ class JsOffcanvas {
     _runAfterCloseTransition() {
         const onCloseComplete = () => {
             if (!this.isHidden) return;
-
+            this.removeTrapFocus();
             this._restoreFocusAfterClose();
 
-            this.setAttribute('tabindex', '-1');
-            this.removeTrapFocus();
+            if (this._hasTemporaryTabindex) {
+                this.removeAttribute('tabindex');
+            }
+
             this.removeAttribute('open');
             this.setTriggerExpanded(false);
             this.showOverlay(false);
