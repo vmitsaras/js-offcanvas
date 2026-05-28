@@ -1,0 +1,269 @@
+/* Off-canvas styles */
+
+:where(.js-offcanvas, [data-offcanvas]) {
+  --_offcanvas-bg: var(--js-offcanvas-bg, #ffffff);
+  --_offcanvas-width: var(--js-offcanvas-width, 18rem);
+  --_offcanvas-height: var(--js-offcanvas-height, 100%);
+  --_offcanvas-closed-x: calc(-1 * var(--_offcanvas-width));
+  --_offcanvas-closed-y: 0;
+  --_offcanvas-duration: var(--js-offcanvas-duration, 0.3s);
+  --_offcanvas-easing: var(--js-offcanvas-easing, ease-in-out);
+  --_offcanvas-z-index: var(--js-offcanvas-z-index, 100);
+  --_offcanvas-box-shadow: var(--js-offcanvas-box-shadow, 0 0 10px rgba(0, 0, 0, 0.2));
+  --_offcanvas-animation-in: var(--js-offcanvas-animation-in, fadeIn);
+  --_offcanvas-animation-out: var(--js-offcanvas-animation-out, fadeOut);
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: var(--_offcanvas-bg);
+  box-sizing: border-box;
+  box-shadow: var(--_offcanvas-box-shadow);
+  display: block;
+  height: var(--_offcanvas-height);
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  max-height: 100dvh;
+  overflow: hidden auto;
+  position: fixed;
+  transform: translate3d(var(--_offcanvas-closed-x), var(--_offcanvas-closed-y), 0);
+  transition-delay: 0s, var(--_offcanvas-duration);
+  transition-duration: var(--_offcanvas-duration), 0s;
+  transition-property: transform, visibility;
+  transition-timing-function: var(--_offcanvas-easing), linear;
+  visibility: hidden;
+  width: var(--_offcanvas-width);
+  z-index: var(--_offcanvas-z-index);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.js-offcanvas, [data-offcanvas]) {
+    --_offcanvas-duration: 1ms;
+  }
+}
+
+@media (max-width: 768px) {
+  :where(.js-offcanvas, [data-offcanvas]) {
+    --_offcanvas-width: min(var(--js-offcanvas-width, 18rem), 80vw);
+  }
+}
+
+:where(.js-offcanvas, [data-offcanvas])[position="right"] {
+  --_offcanvas-closed-x: var(--_offcanvas-width);
+
+  inset-inline-end: 0;
+  inset-inline-start: auto;
+}
+
+:where(.js-offcanvas, [data-offcanvas]):is([position="top"], [position="bottom"]) {
+  --_offcanvas-height: var(--js-offcanvas-height, 15rem);
+  --_offcanvas-width: 100%;
+  --_offcanvas-closed-x: 0;
+
+  height: var(--_offcanvas-height);
+  inset-inline-end: 0;
+  max-height: min(var(--_offcanvas-height), 100dvh);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  :where(.js-offcanvas, [data-offcanvas]):is([position="top"], [position="bottom"]) {
+    --_offcanvas-height: var(--js-offcanvas-height, min(15rem, 50dvh));
+  }
+}
+
+:where(.js-offcanvas, [data-offcanvas])[position="top"] {
+  --_offcanvas-closed-y: calc(-1 * var(--_offcanvas-height));
+
+  inset-block-start: 0;
+}
+
+:where(.js-offcanvas, [data-offcanvas])[position="bottom"] {
+  --_offcanvas-closed-y: var(--_offcanvas-height);
+
+  inset-block-end: 0;
+  inset-block-start: auto;
+}
+
+:where(.js-offcanvas, [data-offcanvas]):is([open], [aria-hidden="false"]) {
+  visibility: visible;
+}
+
+:where(.js-offcanvas, [data-offcanvas])[open] {
+  transition-delay: 0s;
+}
+
+:where(.js-offcanvas, [data-offcanvas])[aria-hidden="false"] {
+  --_offcanvas-closed-x: 0;
+  --_offcanvas-closed-y: 0;
+}
+
+:where(.js-offcanvas, [data-offcanvas]):is([animation], [animation-open], [animation-close]) {
+  animation-duration: var(--_offcanvas-duration);
+  animation-fill-mode: both;
+  transition: none;
+  visibility: visible;
+}
+
+:where(.js-offcanvas, [data-offcanvas]):is([animation], [animation-open], [animation-close])[aria-hidden="false"] {
+  animation-name: var(--_offcanvas-animation-in);
+}
+
+:where(.js-offcanvas, [data-offcanvas]):is([animation], [animation-open], [animation-close])[aria-hidden="true"][open] {
+  --_offcanvas-closed-x: 0;
+  --_offcanvas-closed-y: 0;
+
+  animation-name: var(--_offcanvas-animation-out);
+}
+
+:where(.js-offcanvas, [data-offcanvas]):focus {
+  outline: none;
+}
+
+:where(.js-offcanvas, [data-offcanvas]):focus-visible {
+  outline: 2px solid #4d90fe;
+  outline-offset: -2px;
+}
+
+:where(.js-offcanvas, [data-offcanvas]) button:focus-visible {
+  outline: 2px solid #4d90fe;
+  outline-offset: 2px;
+}
+
+:where(.js-offcanvas-overlay, [data-offcanvas-overlay]) {
+  --_offcanvas-overlay-bg: var(--js-offcanvas-overlay-bg, rgba(0, 0, 0, .68));
+  --_offcanvas-overlay-z-index: var(--js-offcanvas-overlay-z-index, 90);
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background-color: transparent;
+  box-sizing: border-box;
+  inset: 0;
+  height: 100%;
+  position: fixed;
+  transition: background-color .2s ease-in-out, visibility 0s linear .2s;
+  visibility: hidden;
+  width: 100%;
+  z-index: var(--_offcanvas-overlay-z-index);
+}
+
+:where(.js-offcanvas-overlay, [data-offcanvas-overlay])[open] {
+  background-color: var(--_offcanvas-overlay-bg);
+  transition: background-color .2s ease-in-out;
+  visibility: visible;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeOutLeft {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeOutRight {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeOutUp {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+}

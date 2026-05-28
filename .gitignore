@@ -53,5 +53,4 @@ Temporary Items
 *.idea*
 *node_modules*
 *bower_components*
-
-package-lock.json
+dist/

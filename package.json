@@ -1,72 +1,42 @@
 {
   "name": "js-offcanvas",
-  "title": "js-Offcanvas",
-  "main": "src/js-offcanvas.js",
-  "description": "jQuery Accesible Offcanvas Panels",
-  "version": "1.2.11",
+  "main": "dist/js-offcanvas.min.js",
+  "module": "dist/js-offcanvas.es.js",
+  "style": "dist/js-offcanvas.min.css",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "description": "Accessible vanilla JavaScript off-canvas drawer",
+  "version": "2.0.0",
   "homepage": "https://github.com/vmitsaras/js-offcanvas",
   "license": "MIT",
   "keywords": [
-    "jquery",
-    "jquery-plugin",
-    "accesible",
-    "offcanvas"
+    "javascript",
+    "offcanvas",
+    "a11y",
+    "accessible",
+    "drawer"
   ],
   "author": {
     "name": "Vasileios Mitsaras",
-    "twitter": "vmitsaras",
-    "github": "vmitsaras",
-    "email": "github@vasilis.co",
-    "url": "http://vasilis.co"
+    "url": "https://www.linkedin.com/in/vasilis-mitsaras/"
+  },
+  
+  "devDependencies": {
+    "eslint": "^9.13.0",
+    "npm-check-updates": "^17.1.9",
+    "vite": "^5.4.10",
+    "vitest": "^2.1.5",
+    "jsdom": "^25.0.1"
   },
   "scripts": {
-    "test": "grunt test",
-    "clean": "rm -Rf node_modules/ && rm -f ./package-lock.json && npm cache clean -f",
-    "clean_windows": "IF EXIST node_modules rd /s /q node_modules && IF EXIST package-lock.json DEL package-lock.json && npm cache clean -f",
-    "rebuild": "npm run clean && npm i",
-    "rebuild_windows": "npm run clean_windows && npm i"
-  },
-  "devDependencies": {
-    "autoprefixer": "^6.3.3",
-    "bower": "^1.7.7",
-    "cssnano": "^3.5.2",
-    "glob": "^7.0.3",
-    "grunt": "^0.4.5",
-    "grunt-banner": "^0.6.0",
-    "grunt-bytesize": "^0.1.1",
-    "grunt-cli": "^1.2.0",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-concat": "^1.0.0",
-    "grunt-contrib-cssmin": "^1.0.0",
-    "grunt-contrib-jshint": "^1.0.0",
-    "grunt-contrib-qunit": "^1.0.1",
-    "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-uglify": "^1.0.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-gh-pages": "^1.0.0",
-    "grunt-lintspaces": "^0.7.4",
-    "grunt-mkdir": "^1.0.0",
-    "grunt-modernizr": "^1.0.3",
-    "grunt-postcss": "^0.8.0",
-    "load-grunt-tasks": "^3.4.1",
-    "matchdep": "^1.0.1",
-    "qunitjs": "^1.22.0"
-  },
-  "dependencies": {
-    "js-utilities": "*",
-    "js-trap-tab": "*",
-    "js-button": "*"
-  },
-  "engines": {
-    "node": ">=0.8.0",
-    "npm": ">=1.2.10",
-    "yarn": ">= 1.0.0"
-  },
-  "config": {
-    "grunt": "grunt",
-    "src": "src",
-    "dist": "dist",
-    "test": "test",
-    "demo": "demo"
+    "dev": "vite",
+    "lint": "eslint src",
+    "build": "vite build",
+    "serve": "vite preview",
+    "updateDeps": "ncu --upgrade --target minor && npm install",
+    "test": "vitest run"
   }
 }
