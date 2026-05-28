@@ -37,6 +37,12 @@
     "build": "vite build",
     "serve": "vite preview",
     "updateDeps": "ncu --upgrade --target minor && npm install",
-    "test": "vitest run"
+    "test": "vitest run",    
+    "pack:check": "npm pack --dry-run",
+    "release:patch": "npm version patch",
+    "release:minor": "npm version minor",
+    "release:major": "npm version major",
+    "release:beta": "npm version prerelease --preid=beta",
+    "publish:public": "npm publish --access public"
   }
 }
