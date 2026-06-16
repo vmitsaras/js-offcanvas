@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Classic Menu, Reimagined | js-offcanvas Examples</title>
+    <link rel="stylesheet" href="../src/js-offcanvas.css">
+    <link rel="stylesheet" href="./classic-menu.css">
+</head>
+<body>
+    <main class="demo-stage" id="pageContent">
+        <nav class="topbar" aria-label="Demo navigation">
+            <a class="brand" href="./index.html">
+                <span class="brand-mark" aria-hidden="true"></span>
+                js-offcanvas
+            </a>
+            <button class="menu-trigger js-creative-menu-trigger" type="button" aria-controls="creativeMenu" aria-label="Toggle creative menu">
+                <svg viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+                    <path class="menu-line menu-line-top" d="M12 16 H32"/>
+                    <path class="menu-line menu-line-middle" d="M12 22 H32"/>
+                    <path class="menu-line menu-line-bottom" d="M12 28 H32"/>
+                </svg>
+                <span>Menu</span>
+            </button>
+        </nav>
+
+        <section class="hero" aria-labelledby="heroTitle">
+            <div class="hero-copy">
+                <p class="eyebrow">Creative example 01</p>
+                <h1 id="heroTitle">A classic menu with a little stagecraft.</h1>
+                <p>
+                    The offcanvas behavior stays accessible and vanilla. The atmosphere comes from SVG layers,
+                    GSAP timelines, and motion that supports the navigation instead of stealing the wheel.
+                </p>
+                <button class="hero-cta js-creative-menu-open" type="button">Explore the menu</button>
+            </div>
+
+            <div class="orbit-map" aria-hidden="true">
+                <svg viewBox="0 0 620 620">
+                    <defs>
+                        <linearGradient id="orbitStroke" x1="0" x2="1" y1="0" y2="1">
+                            <stop offset="0" stop-color="#3d8c95"/>
+                            <stop offset="0.45" stop-color="#f4bf5f"/>
+                            <stop offset="1" stop-color="#d85f45"/>
+                        </linearGradient>
+                    </defs>
+                    <circle class="orbit-ring orbit-ring-large" cx="310" cy="310" r="226"/>
+                    <circle class="orbit-ring orbit-ring-small" cx="310" cy="310" r="142"/>
+                    <path class="orbit-route" d="M102 335 C170 70 408 88 491 226 C571 360 433 541 253 500 C132 472 73 403 102 335 Z"/>
+                    <circle class="orbit-dot dot-one" cx="102" cy="335" r="9"/>
+                    <circle class="orbit-dot dot-two" cx="491" cy="226" r="9"/>
+                    <circle class="orbit-dot dot-three" cx="253" cy="500" r="9"/>
+                    <path class="orbit-spark" d="M310 194 L330 275 L411 286 L341 329 L356 410 L310 346 L264 410 L279 329 L209 286 L290 275 Z"/>
+                </svg>
+            </div>
+        </section>
+    </main>
+
+    <aside
+        class="creative-menu js-offcanvas"
+        id="creativeMenu"
+        data-offcanvas
+        button-selector=".js-creative-menu-trigger"
+        overlay-selector=".creative-menu-overlay"
+        inert-selector="#pageContent"
+        position="right"
+        width="min(31rem, 92vw)"
+        duration="0.52s"
+        aria-labelledby="creativeMenuTitle">
+        <svg class="menu-tide" viewBox="0 0 520 820" preserveAspectRatio="none" aria-hidden="true">
+            <path class="menu-tide-path" d="M0 0 H520 V820 H0 C84 704 84 598 30 493 C-28 380 2 271 76 192 C127 139 131 59 0 0 Z"/>
+        </svg>
+
+        <div class="creative-menu-inner">
+            <div class="drawer-head">
+                <p class="eyebrow">Navigation</p>
+                <button class="close-button" data-offcanvas-close type="button" aria-label="Close menu">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M6 6 L18 18 M18 6 L6 18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <h2 id="creativeMenuTitle">Where should the panel take you?</h2>
+
+            <nav class="drawer-nav" aria-label="Creative menu">
+                <a class="drawer-link" href="#stories">
+                    <span>01</span>
+                    Stories
+                    <small>Editorial moments and launch notes</small>
+                </a>
+                <a class="drawer-link" href="#workbench">
+                    <span>02</span>
+                    Workbench
+                    <small>Components, patterns, and experiments</small>
+                </a>
+                <a class="drawer-link" href="#studio">
+                    <span>03</span>
+                    Studio
+                    <small>Motion sketches for interactive menus</small>
+                </a>
+                <a class="drawer-link" href="#contact">
+                    <span>04</span>
+                    Contact
+                    <small>Start a build, review, or collaboration</small>
+                </a>
+            </nav>
+
+            <div class="drawer-note">
+                <svg viewBox="0 0 78 78" aria-hidden="true" focusable="false">
+                    <circle cx="39" cy="39" r="34"/>
+                    <path d="M39 14 L45 32 L64 33 L49 44 L54 62 L39 51 L24 62 L29 44 L14 33 L33 32 Z"/>
+                </svg>
+                <p>Powered by the same js-offcanvas instance. GSAP only decorates what happens around it.</p>
+            </div>
+        </div>
+    </aside>
+
+    <div class="creative-menu-overlay js-offcanvas-overlay" data-offcanvas-overlay></div>
+
+    <script type="module" src="./classic-menu.js"></script>
+</body>
+</html>
